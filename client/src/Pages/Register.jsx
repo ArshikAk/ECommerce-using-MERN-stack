@@ -1,6 +1,6 @@
 import Footer from "../Components/Footer"
 import LanguageBar from "../Components/LanguageBar"
-import Navbar from "../Components/Navbar"
+// import Navbar from "../Components/Navbar"
 
 import image from "/loginImage.png"
 
@@ -8,9 +8,9 @@ import { Link } from "react-router-dom"
 
 const Register = () => {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <LanguageBar/>
-      <Navbar/>
+      {/* <Navbar/> */}
 
       <div className="flex w-[100vw] overflow-x-hidden">
 
@@ -37,7 +37,7 @@ const Register = () => {
       </div>
 
       <Footer/>
-    </>
+    </div>
   )
 }
 

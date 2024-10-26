@@ -5,7 +5,7 @@ import SlideShow from "../Components/SlideShow"
 
 const Home = () => {
   return (
-    <>
+    <div className="overflow-x-hidden">
         <LanguageBar/>
         <Navbar/>
 
@@ -32,7 +32,7 @@ const Home = () => {
         </div>
 
         <Footer/>
-    </>
+    </div>
   )
 }
 
