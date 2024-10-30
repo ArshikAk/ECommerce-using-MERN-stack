@@ -3,9 +3,11 @@ import LanguageBar from '../Components/LanguageBar'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import CheckOutCard from '../Components/CheckOutCard'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+
+
 
 const CheckOut = () => {
 
@@ -30,6 +32,8 @@ const CheckOut = () => {
             Authorization: `Bearer ${token}`
         }
     }
+
+    const navigate = useNavigate()
 
     useEffect(() =>  {
         if(from === "cart")
@@ -56,11 +60,53 @@ const CheckOut = () => {
         axios.post("http://localhost:8000/api/orders/placeOrder",{name,email,phone,address,city,landmark,paymentMethod,items},config)
         .then((result) => {
             console.log(result.data)
+            navigate("/ordersuccess")
         })
         .catch((err) => {
             console.log(err)
         })
     }
+
+        // const initiatePayment = async (amount) => {
+
+        //     const orderResponse = await axios.post('/api/payment/create-order', { amount });
+        //     const { amount, id: order_id, currency } = orderResponse.data.order;
+
+        //     const options = {
+        //         key: 'YOUR_RAZORPAY_KEY_ID',
+        //         amount: amount,
+        //         currency: currency,
+        //         name: 'Your Company Name',
+        //         description: 'Test Transaction',
+        //         order_id: order_id,
+        //         handler: async (response) => {
+        //         const data = {
+        //             razorpay_order_id: response.razorpay_order_id,
+        //             razorpay_payment_id: response.razorpay_payment_id,
+        //             razorpay_signature: response.razorpay_signature,
+        //         };
+
+        //         const result = await axios.post('/api/payment/verify-payment', data);
+        //         if (result.data.success) {
+        //             alert('Payment Successful');
+        //         } else {
+        //             alert('Payment verification failed');
+        //         }
+        //         },
+        //         prefill: {
+        //         name: 'Customer Name',
+        //         email: 'customer@example.com',
+        //         contact: '9999999999',
+        //         },
+        //         theme: {
+        //         color: '#3399cc',
+        //         },
+        //     };
+
+        //     const paymentObject = new window.Razorpay(options);
+        //     paymentObject.open();
+        // };
+
 
 
   return (

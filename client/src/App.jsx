@@ -14,6 +14,9 @@ import About from "./Pages/About"
 import Contact from "./Pages/Contact"
 import Products from "./Pages/Products"
 import ViewProduct from "./Pages/ViewProduct"
+import OrderSuccess from "./Pages/OrderSuccess"
+import Orders from "./Pages/Orders"
+import Account from "./Pages/Account"
 
 function App() {
 
@@ -29,6 +32,9 @@ function App() {
       <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
       <Route path="/products/:category?" element={<ProtectedRoute><Products/></ProtectedRoute>} />
       <Route path="/productdetail/:id" element={<ProtectedRoute><ViewProduct /></ProtectedRoute>} />
+      <Route path="/ordersuccess" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
+      <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+      <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   )

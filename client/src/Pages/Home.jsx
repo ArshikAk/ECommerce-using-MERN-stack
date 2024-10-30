@@ -108,7 +108,7 @@ const Home = () => {
 
           <div className="my-10 flex justify-around items-center prod-hori">
 
-            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer" onClick={() => navigate("/products/mens")}  >
+            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer" onClick={() => navigate("/products/men")}  >
               <GiClothes size={35} className="my-3 group-hover:text-white" />
               <h1 className="my-3 text-xl group-hover:text-white">Men&apos;s Wear</h1>
             </div>
@@ -123,7 +123,7 @@ const Home = () => {
               <h1 className="my-3 text-xl group-hover:text-white">Electronics</h1>
             </div>
 
-            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer" onClick={() => navigate("/products/jewellery")}  >
+            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer" onClick={() => navigate("/products/jewelery")}  >
               <GiJewelCrown size={35} className="my-3 group-hover:text-white" />
               <h1 className="my-3 text-xl group-hover:text-white">Jewelery</h1>
             </div>

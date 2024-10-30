@@ -1,9 +1,42 @@
+import { useState } from "react"
 import Footer from "../Components/Footer"
 import LanguageBar from "../Components/LanguageBar"
 import Navbar from "../Components/Navbar"
+import axios from "axios"
 
 
 const Contact = () => {
+
+  const [name , setName] = useState("");
+  const [email , setEmail] = useState("");
+  const [phone , setPhone] = useState("")
+  const [message , setMessage] = useState("");
+
+  let token = localStorage.getItem("token")
+
+  let config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+  }
+
+  const sendMail = () => {
+    axios.post("http://localhost:8000/api/contact/sendContact",{name,email,phone,message},config)
+    .then((response) => {
+      if(response.data.message == "Message sent successfully!")
+      {
+        alert("Mail sent successfully")
+        setName("")
+        setEmail("");
+        setPhone("");
+        setMessage("");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   return (
     <div className="bg-gray-100 overflow-x-hidden">
       <LanguageBar/>
@@ -27,15 +60,15 @@ const Contact = () => {
 
         <div className="shadow-2xl rounded-2xl flex flex-col w-[60%] py-10">
           <div className="flex w-[80%] mx-[10%] justify-between items-center my-5">
-            <input type="text" className="border border-solid border-gray-200 bg-gray-200 rounded-md text-black h-[30px] p-4" placeholder="Your Name" />
-            <input type="text" className="border border-solid border-gray-200 bg-gray-200 rounded-md text-black h-[30px] p-4" placeholder="Your Email" />
-            <input type="text" className="border border-solid border-gray-200 bg-gray-200 rounded-md text-black h-[30px] p-4" placeholder="Your Phone" />
+            <input type="text" className="border border-solid border-gray-200 bg-gray-200 rounded-md text-black h-[30px] p-4" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)}  />
+            <input type="text" className="border border-solid border-gray-200 bg-gray-200 rounded-md text-black h-[30px] p-4" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="number" className="border border-solid border-gray-200 bg-gray-200 rounded-md text-black h-[30px] p-4" placeholder="Your Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
           </div>
 
-          <textarea className="w-[80%] mx-[10%] bg-gray-200 resize-none h-[200px] p-3" placeholder="Your Message" ></textarea>
+          <textarea className="w-[80%] mx-[10%] bg-gray-200 resize-none h-[200px] p-3" placeholder="Your Message" value={message} onChange={(e) => setMessage(e.target.value)} ></textarea>
 
           <div className="flex w-[80%] mx-[10%] justify-end">
-            <button className="bg-red-500 text-white py-3 mt-10 w-[20%]">Send Message</button>
+            <button className="bg-red-500 text-white py-3 mt-10 w-[20%]" onClick={() => sendMail()} >Send Message</button>
           </div>
         </div>
       </div>
