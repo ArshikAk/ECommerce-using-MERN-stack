@@ -26,7 +26,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 
 
 app.get("/",(req,res) => {
-    res.send("Hello World");
+    res.send("Hello World I am Server");
 })
 
 app.use("/api/auth", require("./routes/authRoutes"))
