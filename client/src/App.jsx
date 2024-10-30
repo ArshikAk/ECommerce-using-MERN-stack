@@ -12,6 +12,8 @@ import ErrorPage from "./Pages/ErrorPage"
 import CheckOut from "./Pages/CheckOut"
 import About from "./Pages/About"
 import Contact from "./Pages/Contact"
+import Products from "./Pages/Products"
+import ViewProduct from "./Pages/ViewProduct"
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
       <Route path="/checkout" element={<ProtectedRoute><CheckOut /></ProtectedRoute>} />
       <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
       <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+      <Route path="/products/:category?" element={<ProtectedRoute><Products/></ProtectedRoute>} />
+      <Route path="/productdetail/:id" element={<ProtectedRoute><ViewProduct /></ProtectedRoute>} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   )

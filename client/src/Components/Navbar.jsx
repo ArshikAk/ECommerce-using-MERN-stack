@@ -28,11 +28,10 @@ const Navbar = () => {
         <p className="mx-5 font-semibold cursor-pointer" style={getUnderlineStyle("/")} onClick={() => navigate("/")}>Home</p>
         <p className="mx-5 font-semibold cursor-pointer" style={getUnderlineStyle("/contact")} onClick={() => navigate("/contact")}>Contact</p>
         <p className="mx-5 font-semibold cursor-pointer" style={getUnderlineStyle("/about")} onClick={() => navigate("/about")}>About</p>
-        <p className="mx-5 font-semibold cursor-pointer" style={getUnderlineStyle("/register")} onClick={() => navigate("/register")}>SignUp</p>
+        <p className="mx-5 font-semibold cursor-pointer" style={getUnderlineStyle("/products")} onClick={() => navigate("/products")}>Products</p>
       </div>
 
       <div className="flex items-center">
-        <input type="search" className="border border-gray-300 rounded-md bg-gray-300 text-black pl-3" placeholder="Search Products"/>
 
         <div className="flex" style={ location.pathname === "/login" || location.pathname === "/register" ? { display: "none" } : { display: "flex" }}>
           <CiHeart size={30} className="mx-2 cursor-pointer" onClick={() => navigate("/wishlist")} />

@@ -12,6 +12,7 @@ app.use(cors({
 }))
 
 
+
 mongoose.connect(process.env.CONNECTION_STRING)
 .then(() => {
     console.log("Connected to MongoDB")
@@ -25,3 +26,7 @@ mongoose.connect(process.env.CONNECTION_STRING)
 
 
 app.use("/api/auth", require("./routes/authRoutes"))
+app.use("/api/product" , require("./routes/productRoutes"))
+app.use("/api/cart" , require("./routes/cartRoutes"))
+app.use("/api/wishList" , require("./routes/wishlistRoutes"))
+app.use("/api/orders" , require("./routes/orderRoutes"))

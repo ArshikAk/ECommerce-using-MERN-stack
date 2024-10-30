@@ -6,13 +6,9 @@ const authMiddleware = async (req, res, next) => {
   let token;
   if (req.headers.authorization) {
     try {
-
       token = req.headers.authorization.split(' ')[1];
-
-      const decoded = jwt.verify(token, process.env.secret);
-
-      req.user = await UserModel.findById(decoded.user.id);
-
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      req.user = await UserModel.findById(decoded.id);
       next()
     } 
     catch (error) {

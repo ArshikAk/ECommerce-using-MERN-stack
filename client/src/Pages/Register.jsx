@@ -1,12 +1,39 @@
+import { useState } from "react"
 import Footer from "../Components/Footer"
 import LanguageBar from "../Components/LanguageBar"
 // import Navbar from "../Components/Navbar"
 
+import axios from "axios"
+
 import image from "/loginImage.png"
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Register = () => {
+
+  const [name , setName] = useState("");
+  const [email , setEmail] = useState("");
+  const [password , setPassword] = useState("");
+
+  const navigate = useNavigate()
+
+
+  const submitHandler = () => {
+
+    event.preventDefault()
+
+
+    axios.post("http://localhost:8000/api/auth/register", {name , email , password})
+    .then((res) => {
+      if(res.data == "Success")
+      {
+        alert("Registration Successfull")
+        navigate("/login")
+      }
+    })
+  }
+
+
   return (
     <div className="overflow-x-hidden">
       <LanguageBar/>
@@ -24,13 +51,13 @@ const Register = () => {
             <p className="my-3">Enter your details below</p>
           </div>
 
-          <input type="text" placeholder="Name" className="border-b border-gray-400 border-solid w-[50%] my-5"/>
+          <input type="text" placeholder="Name" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setName(e.target.value) } />
 
-          <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5"/>
+          <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setEmail(e.target.value) } />
 
-          <input type="text" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5"/>
+          <input type="password" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setPassword(e.target.value) } />
 
-          <button className="w-[50%] bg-red-500 text-white py-3 my-5">Create Account</button>
+          <button className="w-[50%] bg-red-500 text-white py-3 my-5" onClick={() => submitHandler()} >Create Account</button>
 
           <p className="text-gray-400">Already have account? <Link to={"/login"} className="text-black underline">Login In</Link></p>
         </div>

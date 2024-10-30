@@ -2,11 +2,37 @@ import Footer from "../Components/Footer"
 import LanguageBar from "../Components/LanguageBar"
 // import Navbar from "../Components/Navbar"
 
+import axios from "axios"
+
 import image from "/loginImage.png"
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Login = () => {
+
+  const [email , setEmail] = useState("")
+  const [password , setPassword] = useState("")
+
+  const navigate = useNavigate()
+
+  const submitHandler = () => {
+
+    event.preventDefault()
+
+
+    axios.post("http://localhost:8000/api/auth/login", {email , password})
+    .then(async (res) => {
+      if(res.data.message == "Success")
+      {
+        await localStorage.setItem("token",res.data.token)
+        alert("Login Successfull")
+        navigate("/")
+      }
+    })
+  }
+
+
   return (
     <div className="overflow-x-hidden">
       <LanguageBar/>
@@ -24,12 +50,12 @@ const Login = () => {
             <p className="my-3">Enter your details below</p>
           </div>
 
-          <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5"/>
+          <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setEmail(e.target.value)} />
 
-          <input type="text" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5"/>
+          <input type="text" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setPassword(e.target.value)} />
 
           <div className="flex justify-between items-center w-[50%] mx-5">
-            <button className="bg-red-500 text-white p-3 px-10 my-5">Login</button>
+            <button className="bg-red-500 text-white p-3 px-10 my-5" onClick={() => submitHandler()}>Login</button>
             <p className="text-red-500">Forget Password?</p>
           </div>
 
