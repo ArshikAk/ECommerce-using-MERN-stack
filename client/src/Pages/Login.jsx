@@ -21,7 +21,7 @@ const Login = () => {
     event.preventDefault()
 
 
-    axios.post("http://localhost:8000/api/auth/login", {email , password})
+    axios.post("exclusiveserver-fkcbft12z-arshiks-projects.vercel.app/api/auth/login", {email , password})
     .then(async (res) => {
       if(res.data.message == "Success")
       {
