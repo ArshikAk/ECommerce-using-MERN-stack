@@ -3,6 +3,7 @@ import Footer from "../Components/Footer"
 import LanguageBar from "../Components/LanguageBar"
 import Navbar from "../Components/Navbar"
 import ProductCard from "../Components/ProductCard"
+import ReviewCard from "../Components/ReviewCard"
 
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
@@ -15,8 +16,19 @@ const ViewProduct = () => {
     const [products , setProducts] = useState([])
     const [relatedProducts , setRelatedProducts] = useState([])
     const [selectedSize , setSelectedSize] = useState("")
+    const [message , setMessage] = useState("")
+    const [review , setReview] = useState(null)
+    const [reviewRefresh, setReviewRefresh] = useState(false);
 
     const navigate = useNavigate()
+
+    let token = localStorage.getItem("token")
+
+    let config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
 
     useEffect(() => {
       axios.get(`http://localhost:8000/api/product/getProducts`)
@@ -36,8 +48,39 @@ const ViewProduct = () => {
     },[product ,products])
 
     useEffect(() => {
+      axios.get(`http://localhost:8000/api/review/getReview/${id}`,config)
+      .then((res) => {
+        if(res.data == "No reviews found")
+        {
+          setReview(null)
+        }
+        else{
+          setReview(res.data.review)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },[id,reviewRefresh])
+
+    useEffect(() => {
       window.scrollTo(0, 0);
     }, [id]);
+
+
+    const sendReview = () => {
+      axios.post(`http://localhost:8000/api/review/addReview`, {id,message},config)
+      .then((result) => {
+        if(result.data == "Success")
+        {
+          alert("Review sent successfully")
+          setReviewRefresh(!reviewRefresh)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
 
 
   return (
@@ -45,7 +88,7 @@ const ViewProduct = () => {
       <LanguageBar/>
       <Navbar/>
 
-      <div className="flex justify-center items-center my-10">
+      <div className="flex justify-center items-center my-32">
 
         <div className="mx-10 flex flex-col">
             <img src={product.image} alt="" className="w-[100px] h-[100px] my-3 border border-black border-solid p-5 cursor-pointer" />
@@ -90,6 +133,35 @@ const ViewProduct = () => {
       </div>
 
       <div className="flex flex-col mt-20 w-[100%] px-[5%] border-y py-10 border-gray-400 border-solid">
+
+          <div className="flex items-center">
+            <div className="w-[15px] h-[30px] bg-red-500 rounded">
+            </div>
+            <p className="font-bold m-3">User Reviews</p>
+          </div>
+
+          <div className="my-5 flex flex-col prod-hori">
+          { review == null ? 
+
+            (<h1 className="text-2xl text-center w-full my-5" >No Reviews Found</h1>) : 
+
+            (review.map((item, index) => (
+                  <div key={index} className="flex-shrink-0 my-5 w-full">
+                    <ReviewCard item={item}/>
+                  </div>
+            )))
+          }
+          </div>
+        </div>
+
+        <div className="border-t border-gray-300 py-10 w-[90%] mx-[5%]">
+          <h3 className="text-lg font-bold my-5">Add Your Review</h3>
+          <textarea placeholder="Your Feedback" className="border border-gray-300 rounded p-2 w-full my-5 h-24" onChange={(e) => setMessage(e.target.value)} />
+          <button className="bg-red-500 text-white p-3 rounded my-5" onClick={() => sendReview()} >Submit Review</button>
+        </div>
+  
+
+      <div className="flex flex-col w-[100%] px-[5%] border-y py-10 border-gray-400 border-solid">
 
           <div className="flex items-center">
             <div className="w-[15px] h-[30px] bg-red-500 rounded">

@@ -21,14 +21,18 @@ const Login = () => {
     event.preventDefault()
 
 
-    axios.post("exclusiveserver-fkcbft12z-arshiks-projects.vercel.app/api/auth/login", {email , password})
+    axios.post("http://localhost:8000/api/auth/login", {email , password})
     .then(async (res) => {
+      console.log(res.data)
       if(res.data.message == "Success")
       {
         await localStorage.setItem("token",res.data.token)
         alert("Login Successfull")
         navigate("/")
       }
+    })
+    .catch((err) => {
+      console.log(err)
     })
   }
 
@@ -52,7 +56,7 @@ const Login = () => {
 
           <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setEmail(e.target.value)} />
 
-          <input type="text" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setPassword(e.target.value)} />
 
           <div className="flex justify-between items-center w-[50%] mx-5">
             <button className="bg-red-500 text-white p-3 px-10 my-5" onClick={() => submitHandler()}>Login</button>
