@@ -45,11 +45,10 @@ const orderSchema = new mongoose.Schema({
     email : {
         type : String,
         required : true,
-        unique : true
     },
-    orders : {
-        type : [itemSchema],
-        default : []
+    order : {
+        type : itemSchema,
+        default : {}
     }
 })
 

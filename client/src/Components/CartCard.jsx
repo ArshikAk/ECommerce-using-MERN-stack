@@ -42,7 +42,7 @@ const CartCard = ({item , onDelete }) => {
     <p className="font-medium">{item.name}</p>
   </div>
 
-  <p className="text-center font-medium">${item.price}</p>
+  <p className="text-center font-medium">₹{item.price}</p>
 
   <div className="flex justify-center items-center">
     <button
@@ -63,7 +63,7 @@ const CartCard = ({item , onDelete }) => {
     </button>
   </div>
 
-  <p className="text-center font-medium">${item.price * count}</p>
+  <p className="text-center font-medium">₹{item.price * count}</p>
 
   <FaRegTrashAlt
     aria-label="Delete item from cart"

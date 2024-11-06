@@ -3,7 +3,7 @@ const orderModel = require("../models/orderModel")
 
 exports.getOrders = async (req,res) => {
     try {
-        orderModel.findOne({email : req.user.email})
+        orderModel.find({email : req.user.email})
         .then((result) => {
             res.json(result)
         })
@@ -22,36 +22,7 @@ exports.placeOrder = async (req,res) => {
 
         const {name,email,phone,address,city,landmark,paymentMethod,items} = req.body
 
-        orderModel.findOne({email : req.user.email})
-        .then((result) => {
-            if(result) {
-                let todayDate = new Date()
-
-                let day = todayDate.getDate()
-                let month = todayDate.getMonth() + 1
-                let year = todayDate.getFullYear()
-
-                let date = `${year}-${month}-${day}`
-
-                items.forEach((item) => {
-                    let newOrder = {
-                        name : name,
-                        email : email,
-                        phone : phone,
-                        address : address,
-                        city : city,
-                        landMark : landmark,
-                        paymentMethod : paymentMethod,
-                        product : item,
-                        date : date
-                    }
-                    result.orders.push(newOrder)
-                })
-                result.save()
-                res.json("Success")
-            }
-            else{
-                let todayDate = new Date()
+        let todayDate = new Date()
 
                 let day = todayDate.getDate()
                 let month = todayDate.getMonth() + 1
@@ -62,6 +33,10 @@ exports.placeOrder = async (req,res) => {
                 let temp = []
 
                 items.forEach((item) => {
+                    let newElement = {}
+
+                    newElement.email = req.user.email
+
                     let newOrder = {
                         name : name,
                         email : email,
@@ -73,20 +48,18 @@ exports.placeOrder = async (req,res) => {
                         product : item,
                         date : date
                     }
-                    temp.push(newOrder)
-                })
 
-                orderModel.create({
-                    email : req.user.email,
-                    orders : temp
-                })
+                    newElement.order = newOrder
 
-                res.json("Success")
-            }
-        })
-        .catch((err) => {
-            res.status(500).json({message : "Error fetching orders" , error : err})  
-        })
+                    temp.push(newElement)
+                })
+                orderModel.insertMany(temp)
+                .then((result) =>  {
+                    res.json("Success")
+                })
+                .catch((err) => {
+                    res.status(500).json(err)  
+                })
 
     }
     catch (err) {

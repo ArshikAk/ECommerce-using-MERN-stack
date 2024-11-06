@@ -30,7 +30,7 @@ const OrderCard = ({order}) => {
 
               <div>
                     <p className="text-lg font-bold text-gray-800 mx-5">
-                      ${order.product.price}
+                    ₹{order.product.price}
                     </p>
               </div>
             </div>

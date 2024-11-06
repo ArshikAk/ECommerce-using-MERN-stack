@@ -9,7 +9,7 @@ const CheckOutCard = ({item}) => {
         <p className="font-medium mx-3 truncate w-full">{item.name}</p>
       </div>
 
-      <p className="font-medium">${item.price}</p>
+      <p className="font-medium">₹{item.price}</p>
     </div>
   )
 }

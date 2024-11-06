@@ -36,11 +36,11 @@ const WishListCard = ({ item, onDelete }) => {
   return (
     <div className="flex justify-between items-center border border-white p-5 my-10 shadow-2xl bg-gray-200 rounded-lg">
       <div className="w-[30%] flex items-center">
-        <img src={item.image} alt="Product" className="w-[50px] h-[50px] mx-3" />
+        <img src={item.image} alt="Product" className="w-[50px] h-[50px] mx-3"/>
         <p className="font-medium">{item.name}</p>
       </div>
 
-      <p className="w-[20%] text-center font-medium">${item.price}</p>
+      <p className="w-[20%] text-center font-medium">₹{item.price}</p>
 
       <FaRegTrashAlt
         aria-label="Delete item from wishlist"

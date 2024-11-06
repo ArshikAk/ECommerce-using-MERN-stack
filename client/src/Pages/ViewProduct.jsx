@@ -104,7 +104,7 @@ const ViewProduct = () => {
         <div className="flex flex-col w-[25%] mx-20" >
             <div className="border-b border-gray-400 border-solid pb-5">
                 <h1 className="text-xl font-bold my-2" >{product.name}</h1>
-                <h3 className="text-2xl my-2" >${product.price}</h3>
+                <h3 className="text-2xl my-2" >₹{product.price}</h3>
                 <p className="text-sm my-3 leading-6" >{product.description}.</p>
             </div>
 

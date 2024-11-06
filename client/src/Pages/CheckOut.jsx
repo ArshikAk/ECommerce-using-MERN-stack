@@ -170,7 +170,7 @@ const CheckOut = () => {
 
                 <div className="flex justify-between py-3 my-2 border-b border-gray-300 border-solid">
                     <p className="font-semibold">SubTotal</p>
-                    <p className="font-semibold">${total}</p>
+                    <p className="font-semibold">₹{total}</p>
                 </div>
 
                 <div className="flex justify-between py-3 my-2 border-b border-gray-300 border-solid">
@@ -180,7 +180,7 @@ const CheckOut = () => {
 
                 <div className="flex justify-between py-3 my-2 border-b border-gray-300 border-solid">
                     <p className="font-semibold">Total</p>
-                    <p className="font-semibold">${total}</p>
+                    <p className="font-semibold">₹{total}</p>
                 </div>
 
           </div>

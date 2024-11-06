@@ -61,7 +61,7 @@ const ProductCard = ({ product }) => {
 
 
   return (
-    <div className="flex flex-col m-10 justify-center items-start product relative w-[250px]">
+    <div className="flex flex-col m-10 justify-center items-start product relative w-[250px] hover:scale-110 transition-none ease-in-out">
 
       <img src={product.image} alt={product.name} className="w-[250px] h-[250px] cursor-pointer" onClick={() => navigate(`/productdetail/${product.productId}`)}  />
 
@@ -70,7 +70,7 @@ const ProductCard = ({ product }) => {
         onClick={() => addCart()}>Add to Cart</button>
 
       <p className="font-bold mt-3 truncate w-full ">{product.name}</p>
-      <p className="mt-2 text-red-500">${product.price}</p>
+      <p className="mt-2 text-red-500">₹{product.price}</p>
 
       <CiHeart size={35} className="mx-2 cursor-pointer absolute right-1 top-3 p-1 rounded-full bg-opacity-70 
         transition-colors duration-200 bg-gray-200 text-gray-800 hover:bg-red-500 hover:text-white" 

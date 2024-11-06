@@ -111,7 +111,7 @@ const About = () => {
             </div>
           </div>
           <p className="my-1 text-xl font-bold">FREE AND FAST DELIVERY</p>
-          <p className="my-1 text-sm text-gray-400 font-semibold">Free delivery for all orders over $140</p>
+          <p className="my-1 text-sm text-gray-400 font-semibold">Free delivery for all orders over ₹140</p>
         </div>
 
         <div className="flex flex-col justify-center items-center">
