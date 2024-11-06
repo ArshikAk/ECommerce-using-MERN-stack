@@ -3,6 +3,7 @@ import Footer from "../Components/Footer"
 import LanguageBar from "../Components/LanguageBar"
 import Navbar from "../Components/Navbar"
 import axios from "axios"
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 
 const Contact = () => {
@@ -20,12 +21,22 @@ const Contact = () => {
         }
   }
 
+  const [notificationMessage , setNotificationMessage] = useState("")
+  const [notificationOpen,setNotificationOpen] = useState(false)
+  const [severity, setSeverity] = useState("error")
+
+  const notificationAction = () => {
+    setNotificationOpen(false)
+  }
+
   const sendMail = () => {
     axios.post("http://localhost:8000/api/contact/sendContact",{name,email,phone,message},config)
     .then((response) => {
       if(response.data.message == "Message sent successfully!")
       {
-        alert("Mail sent successfully")
+        setSeverity("success")
+        setNotificationMessage("Mail Sent Successfully")
+        setNotificationOpen(true)
         setName("")
         setEmail("");
         setPhone("");
@@ -41,6 +52,12 @@ const Contact = () => {
     <div className="bg-gray-100 overflow-x-hidden">
       <LanguageBar/>
       <Navbar/>
+
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+        <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
 
       <div className="flex my-20 justify-around items-center">
         <div className="shadow-2xl py-10 px-16 rounded-2xl">

@@ -30,7 +30,7 @@ const Sidebar = () => {
           Orders
         </Link>
 
-        <Link to="/admin/settings" className={selectedTabStyle("/admin/settings")} onClick={() => localStorage.removeItem("token")} >
+        <Link className={selectedTabStyle("/admin/settings")} onClick={() => localStorage.removeItem("token")} >
           <FaCog className="mr-3" />
           LogOut
         </Link>

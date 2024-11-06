@@ -28,13 +28,27 @@ exports.addProduct = async (req,res) => {
 
 exports.getProducts = async (req,res) => {
     try {
-        productModel.find()
-        .then((result) => {
-            res.status(200).json(result)
-        })
-        .catch((err) => {
-            res.status(400).json(err)
-        })
+        const {id} = req.params || null
+        
+        if(id == null)
+        {
+            productModel.find()
+            .then((result) => {
+                res.status(200).json(result)
+            })
+            .catch((err) => {
+                res.status(400).json(err)
+            })
+        }
+        else{
+            productModel.find({productId : id})
+            .then((result) => {
+                res.status(200).json(result)
+            })
+            .catch((err) => {
+                res.status(400).json(err)
+            })
+        }
     }
     catch (error) {
         res.status(500).json({ message: error.message })

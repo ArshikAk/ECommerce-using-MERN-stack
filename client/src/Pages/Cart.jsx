@@ -5,12 +5,12 @@ import LanguageBar from "../Components/LanguageBar";
 import Navbar from "../Components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 
 const Cart = () => {
 
   let token = localStorage.getItem("token")
-
   let config = {
     headers: {
       Authorization: `Bearer ${token}`
@@ -20,6 +20,14 @@ const Cart = () => {
   const [cartitems , setCartItems] = useState(null)
   const [total , setTotal] = useState(0)
   const navigate = useNavigate()
+
+  const [notificationMessage , setNotificationMessage] = useState("")
+  const [notificationOpen,setNotificationOpen] = useState(false)
+  const [severity, setSeverity] = useState("error")
+
+  const notificationAction = () => {
+    setNotificationOpen(false)
+  }
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/cart/getCart",config)
@@ -37,6 +45,10 @@ const Cart = () => {
 
   const removeItemFromCart = (productId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.productId !== productId));
+
+    setSeverity("success")
+    setNotificationMessage("Product Removed from the Cart")
+    setNotificationOpen(true)
   };
 
 
@@ -44,6 +56,12 @@ const Cart = () => {
     <div>
       <LanguageBar />
       <Navbar />
+
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+            <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+              {notificationMessage}
+            </Alert>            
+      </Snackbar>
 
       <div className="py-5 bg-gray-100">
 

@@ -3,16 +3,25 @@ import axios from "axios";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PropTypes from 'prop-types';
 import { useState } from "react";
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 const WishListCard = ({ item, onDelete }) => {
+
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
-
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  const [notificationMessage , setNotificationMessage] = useState("")
+  const [notificationOpen,setNotificationOpen] = useState(false)
+  const [severity, setSeverity] = useState("error")
+
+  const notificationAction = () => {
+    setNotificationOpen(false)
+  }
 
   const deleteWishListItem = () => {
     setLoading(true);
@@ -20,13 +29,17 @@ const WishListCard = ({ item, onDelete }) => {
       .delete(`http://localhost:8000/api/wishList/deleteWishListItem/${item.productId}`, config)
       .then((res) => {
         if (res.data === "Success") {
-          alert("Product Deleted");
+          setSeverity("success")
+          setNotificationOpen(true)
+          setNotificationMessage("Product Removed from wishlist")
           onDelete(item.productId);
         }
       })
       .catch((err) => {
         console.log(err);
-        alert("Failed to delete product. Please try again.");
+          setSeverity("error")
+          setNotificationOpen(true)
+          setNotificationMessage("Failed to remove the product")
       })
       .finally(() => {
         setLoading(false);
@@ -35,6 +48,13 @@ const WishListCard = ({ item, onDelete }) => {
 
   return (
     <div className="flex justify-between items-center border border-white p-5 my-10 shadow-2xl bg-gray-200 rounded-lg">
+
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+        <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
+
       <div className="w-[30%] flex items-center">
         <img src={item.image} alt="Product" className="w-[50px] h-[50px] mx-3"/>
         <p className="font-medium">{item.name}</p>

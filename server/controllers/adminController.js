@@ -42,3 +42,40 @@ exports.getOrders = async (req,res) => {
         console.log(err)
     }
 }
+
+
+exports.addProduct = async (req,res) => {
+    try{
+        const {product} = req.body
+        const productCount = await productModel.countDocuments()
+
+        product.productId = productCount+1
+
+        productModel.create(product)
+        .then((result) => {
+            res.json("Success")
+        }).catch((err) => {
+            res.statsu(401).json(err)
+        });
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+
+exports.updateProduct = async (req,res) => {
+    try{
+        const {product} = req.body
+
+        productModel.updateOne({productId : product.productId},product)
+        .then((result) => {
+            res.json("Success")
+        }).catch((err) => {
+            res.statsu(401).json(err)
+        });
+    }
+    catch (err) {
+        console.log(err)
+    }
+}

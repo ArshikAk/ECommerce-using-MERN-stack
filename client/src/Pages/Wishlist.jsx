@@ -4,6 +4,7 @@ import LanguageBar from "../Components/LanguageBar";
 import Navbar from "../Components/Navbar";
 import WishListCard from "../Components/WishListCard";
 import axios from "axios";
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 const Wishlist = () => {
   const [items, setItems] = useState(null);
@@ -16,6 +17,14 @@ const Wishlist = () => {
       Authorization: `Bearer ${token}`,
     },
   };
+
+  const [notificationMessage , setNotificationMessage] = useState("")
+  const [notificationOpen,setNotificationOpen] = useState(false)
+  const [severity, setSeverity] = useState("error")
+
+  const notificationAction = () => {
+    setNotificationOpen(false)
+  }
 
   useEffect(() => {
     axios
@@ -40,7 +49,9 @@ const Wishlist = () => {
     .then((result) => {
       if(result.data == "Success")
       {
-        alert("All Items are added to cart");
+        setSeverity("success")
+        setNotificationMessage("All Items are added to cart")
+        setNotificationOpen(true)
       }
     })
     .catch((error) => {
@@ -52,6 +63,12 @@ const Wishlist = () => {
     <div className="h-[100vh]">
       <LanguageBar />
       <Navbar />
+
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+        <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
 
       <div className="flex justify-between items-center w-[80%] mx-[10%] mt-10">
         <h1>Wishlist ({count})</h1>

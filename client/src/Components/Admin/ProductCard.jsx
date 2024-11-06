@@ -1,15 +1,12 @@
 /* eslint-disable react/prop-types */
 import { CiMenuBurger } from "react-icons/ci";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ item }) => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-    const handleEdit = () => {
-        console.log("Edit product:", item.name);
-        setIsDropdownOpen(false);
-    };
+    const navigate = useNavigate()
 
     const handleDelete = () => {
         console.log("Delete product:", item.name);
@@ -17,7 +14,7 @@ const ProductCard = ({ item }) => {
     };
 
   return (
-    <div className="flex justify-between items-center border border-gray-300 p-4 px-8 my-3 shadow-lg bg-gray-100 rounded-lg mx-auto">
+    <div className="flex justify-between items-center border border-gray-300 p-4 px-8 my-3 shadow-lg bg-gray-100 rounded-lg mx-auto relative">
  
       <div className="flex items-center w-1/3">
         <img src={item.image} alt={item.name} className="w-[40px] h-[40px] mx-2 rounded-md" />
@@ -33,10 +30,10 @@ const ProductCard = ({ item }) => {
           <CiMenuBurger size={14} onClick={() => setIsDropdownOpen(!isDropdownOpen)}/>
         </button>
         {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 w-24 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+          <div className="absolute right-20 -top-5 mt-4 w-24 bg-white border border-gray-300 rounded-lg shadow-lg z-30">
             <ul>
-              <li onClick={handleEdit} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">Edit</li>
-              <li onClick={handleDelete} className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">Delete</li>
+              <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick = {() => navigate(`/admin/updateProduct/${item.productId}`)}>Edit</li>
+              <li onClick={handleDelete} className="px-4 py-2 text-sm text-red-500 hover:bg-gray-100 cursor-pointer">Delete</li>
             </ul>
           </div>
         )}

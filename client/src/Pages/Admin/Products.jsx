@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../Components/Admin/Sidebar";
 import axios from "axios";
 import ProductCard from "../../Components/Admin/ProductCard";
+import { useNavigate } from "react-router-dom";
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,8 @@ const AdminProducts = () => {
     fetchProducts();
   }, []);
 
+  const navigate = useNavigate()
+
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       <div className="h-full">
@@ -32,7 +35,7 @@ const AdminProducts = () => {
       <div className="w-full flex flex-col">
         <div className="flex justify-between items-center my-10 mx-10">
           <h1 className="text-2xl text-gray-800">List of All Products</h1>
-          <button className="border border-black border-solid bg-gray-800 text-white px-10 py-3 rounded-lg">
+          <button className="border border-black border-solid bg-gray-800 text-white px-10 py-3 rounded-lg" onClick={() => navigate("/admin/addProduct")} >
             Add Product
           </button>
         </div>
@@ -46,13 +49,13 @@ const AdminProducts = () => {
           </div>
         </div>
 
-        <div className="w-[95%] mx-auto h-[calc(100vh-200px)] overflow-y-auto prod-hori">
+        <div className="w-[95%] mx-auto h-[calc(100vh-340px)] overflow-scroll prod-hori">
           {loading ? (
             <p className="text-center text-white">Loading products...</p>
           ) : error ? (
             <p className="text-center text-red-500">{error}</p>
           ) : products.length === 0 ? (
-            <p className="text-center text-white">No products available.</p>
+            <p className="text-center text-white">No products available</p>
           ) : (
             products.map((product,index) => (
               <ProductCard key={index} item={product} />

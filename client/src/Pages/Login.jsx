@@ -3,37 +3,72 @@ import LanguageBar from "../Components/LanguageBar"
 // import Navbar from "../Components/Navbar"
 
 import axios from "axios"
-
 import image from "/loginImage.png"
-
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
+
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 const Login = () => {
 
   const [email , setEmail] = useState("")
   const [password , setPassword] = useState("")
 
+  const [notificationMessage , setNotificationMessage] = useState("")
+  const [notificationOpen,setNotificationOpen] = useState(false)
+  const [severity, setSeverity] = useState("error")
   const navigate = useNavigate()
 
+  const notificationAction = () => {
+    setNotificationOpen(false)
+  }
+
+  const validator = () => {
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!emailRegex.test(email)) {
+        setNotificationMessage("Please enter a valid email address");
+        setNotificationOpen(true);
+        return false;
+    }
+    // else if (!passwordRegex.test(password)) {
+    //     setNotificationMessage("Password must be at least 8 characters long, with one uppercase letter, one lowercase letter, one number, and one special character");
+    //     setNotificationOpen(true);
+    //     return false;
+    // }
+    return true;
+};
+
   const submitHandler = () => {
-
     event.preventDefault()
-
-
-    axios.post("http://localhost:8000/api/auth/login", {email , password})
-    .then(async (res) => {
-      console.log(res.data)
-      if(res.data.message == "Success")
-      {
-        await localStorage.setItem("token",res.data.token)
-        alert("Login Successfull")
-        navigate("/")
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    
+    if(validator())
+    {
+      axios.post("http://localhost:8000/api/auth/login", {email , password})
+      .then(async (res) => {
+        if(res.data.message == "Success")
+        {
+          localStorage.setItem("token",res.data.token)
+          setSeverity("success")
+          setNotificationOpen(true)
+          setNotificationMessage("Login Successfully Completed")
+          setTimeout(() => {
+            navigate("/")
+          },2000)
+        }
+        else if(res.data == "User Not Found" || res.data == "Invalid Password")
+        {
+          setSeverity("error")
+          setNotificationOpen(true)
+          setNotificationMessage("Invalid User Email or Password")
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
   }
 
 
@@ -41,6 +76,12 @@ const Login = () => {
     <div className="overflow-x-hidden">
       <LanguageBar/>
       {/* <Navbar/> */}
+
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+        <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
 
       <div className="flex w-[100vw]">
 

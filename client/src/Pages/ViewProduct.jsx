@@ -4,6 +4,7 @@ import LanguageBar from "../Components/LanguageBar"
 import Navbar from "../Components/Navbar"
 import ProductCard from "../Components/ProductCard"
 import ReviewCard from "../Components/ReviewCard"
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
@@ -28,6 +29,14 @@ const ViewProduct = () => {
         headers: {
             Authorization: `Bearer ${token}`
         }
+    }
+
+    const [notificationMessage , setNotificationMessage] = useState("")
+    const [notificationOpen,setNotificationOpen] = useState(false)
+    const [severity, setSeverity] = useState("error")
+
+    const notificationAction = () => {
+      setNotificationOpen(false)
     }
 
     useEffect(() => {
@@ -73,7 +82,9 @@ const ViewProduct = () => {
       .then((result) => {
         if(result.data == "Success")
         {
-          alert("Review sent successfully")
+          setSeverity("success")
+          setNotificationMessage("Review Added")
+          setNotificationOpen(true)
           setReviewRefresh(!reviewRefresh)
         }
       })
@@ -87,6 +98,12 @@ const ViewProduct = () => {
     <div>
       <LanguageBar/>
       <Navbar/>
+      
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+        <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
 
       <div className="flex justify-center items-center my-32">
 

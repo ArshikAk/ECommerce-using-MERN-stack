@@ -22,6 +22,8 @@ import Account from "./Pages/Account"
 import Dashboard from "./Pages/Admin/DashBoard"
 import AdminProducts from "./Pages/Admin/Products"
 import AdminOrders from "./Pages/Admin/Orders"
+import AddProduct from "./Pages/Admin/AddProduct"
+import UpdateProduct from "./Pages/Admin/UpdateProduct"
 
 function App() {
 
@@ -45,6 +47,8 @@ function App() {
       <Route path="/admin/dashboard" element={<Dashboard/>}/>
       <Route path="/admin/products" element={<AdminProducts/>}/>
       <Route path="/admin/orders" element={<AdminOrders/>}/>
+      <Route path="/admin/addProduct" element={<AddProduct/>}/>
+      <Route path="/admin/updateProduct/:id" element={<UpdateProduct/>}/>
     </Routes>
   )
 }
