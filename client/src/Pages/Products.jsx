@@ -9,9 +9,14 @@ import { useLocation } from "react-router-dom";
 const Products = () => {
   const [products, setProducts] = useState(null);
   const [search, setSearch] = useState("");
+  const [category,setCategory] = useState(null)
 
   const location = useLocation()
-  const {category} = location.state || null
+  
+  if(location.state)
+  {
+    setCategory(location.state)
+  }
 
   useEffect(() => {
     axios
