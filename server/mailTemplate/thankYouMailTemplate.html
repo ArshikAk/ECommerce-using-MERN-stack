@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+      background-color: gray;
+    }
+    .email-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      border: 1px solid black;
+    }
+    .header {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #4CAF50;
+    }
+    .order-details {
+      margin: 20px 0;
+    }
+    .order-details h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333333;
+    }
+    .order-info {
+      margin-bottom: 20px;
+    }
+    .order-info p {
+      margin: 5px 0;
+    }
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .items-table th, .items-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #dddddd;
+    }
+    .items-table th {
+      background-color: #f4f4f4;
+    }
+    .total {
+      text-align: right;
+      padding: 10px;
+      font-size: 18px;
+      color: #333333;
+      font-weight: bold;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888888;
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #dddddd;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="email-container">
+    
+    <div class="header">
+      <h1>Thank You for Your Order!</h1>
+    </div>
+
+    <div class="order-details">
+      <h2>Order Confirmation</h2>
+      <p>Hi [Customer Name],</p>
+      <p>Thank you for shopping with us! We’re excited to let you know that we’ve received your order and it’s being processed. Below are the details of your order:</p>
+
+      <div class="order-info">
+        <p><strong>Order Date:</strong> [Order Date]</p>
+        <p><strong>Shipping Address:</strong> [Customer Address]</p>
+      </div>
+    </div>
+
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        [Order Items]
+    </table>
+
+    <div class="total">
+      Total: [Total Amount]
+    </div>
+
+    <div class="footer">
+      <p>If you have any questions about your order, please reply to this email or contact our support team at support@exclusive.com.</p>
+      <p>&copy; 2024 Exclusive. All rights reserved.</p>
+    </div>
+  </div>
+
+</body>
+</html>

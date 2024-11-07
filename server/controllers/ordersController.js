@@ -1,4 +1,5 @@
 const orderModel = require("../models/orderModel")
+const {sendThankYouMail} = require("./contactController")
 
 
 exports.getOrders = async (req,res) => {
@@ -55,6 +56,7 @@ exports.placeOrder = async (req,res) => {
                 })
                 orderModel.insertMany(temp)
                 .then((result) =>  {
+                    sendThankYouMail(req.user.email,temp)
                     res.json("Success")
                 })
                 .catch((err) => {
