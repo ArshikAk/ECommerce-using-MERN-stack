@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const fs = require("fs")
 const path = require("path")
+const otpModel = require("../models/otpModel")
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -12,6 +13,8 @@ const transporter = nodemailer.createTransport({
       pass: process.env.EMAIL_PASSWORD,
     },
   });
+
+
 
 exports.sendContactMail =  async (req, res) => {
     const { name, email, message } = req.body;
@@ -81,6 +84,45 @@ exports.sendThankYouMail = async (email,orderDetails) => {
   
   try {
     await transporter.sendMail(mailOptions);
+  } 
+  catch (error) {
+      console.error('Error sending message:', error);
+  }
+}
+
+
+const generateOTP= () => {
+
+  let otp = '';
+  const alphaDigits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
+
+  for (let i = 0; i < 6; i++) {
+    otp += alphaDigits.charAt(Math.floor(Math.random() * alphaDigits.length));
+  }
+
+  return otp;
+}
+
+
+exports.sendOTPMail = async (email) => {
+
+  let content = fs.readFileSync(path.join(__dirname,"..","mailTemplate","otpMailTemplate.html"),'utf-8')
+  const OTP = generateOTP()
+  const htmlContent = content.replace('[OTP]', OTP)
+
+  const mailOptions = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: `OTP for Password Reset`,
+      html: htmlContent
+  };
+  
+  try {
+    await transporter.sendMail(mailOptions);
+    otpModel.create({
+      email: email,
+      otp: OTP
+    })
   } 
   catch (error) {
       console.error('Error sending message:', error);

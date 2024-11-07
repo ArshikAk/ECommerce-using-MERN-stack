@@ -118,7 +118,7 @@ const Login = () => {
 
           <div className="flex justify-between items-center w-[50%] mx-5">
             <button className="bg-red-500 text-white p-3 px-10 my-5" onClick={() => submitHandler()}>Login</button>
-            <p className="text-red-500">Forget Password?</p>
+            <p className="text-red-500 cursor-pointer" onClick={() => navigate("/otpemail")} >Forget Password?</p>
           </div>
 
           <p className="text-gray-400">Don&apos;t have account? <Link to={"/register"} className="text-black underline">Register</Link></p>

@@ -26,6 +26,9 @@ import AdminOrders from "./Pages/Admin/Orders"
 import AddProduct from "./Pages/Admin/AddProduct"
 import UpdateProduct from "./Pages/Admin/UpdateProduct"
 
+import OTPEmail from "./Pages/OTPEmail"
+import OTPVerify from "./Pages/OTPVerify"
+
 function App() {
 
   return (
@@ -33,6 +36,8 @@ function App() {
       
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/otpemail" element={<OTPEmail />} />
+      <Route path="/otpverify" element={<OTPVerify />} />
       <Route path="*" element={<ErrorPage />} />
 
 
