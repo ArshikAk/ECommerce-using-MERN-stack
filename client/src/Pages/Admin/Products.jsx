@@ -3,6 +3,7 @@ import Sidebar from "../../Components/Admin/Sidebar";
 import axios from "axios";
 import ProductCard from "../../Components/Admin/ProductCard";
 import { useNavigate } from "react-router-dom";
+import { Snackbar, Alert, Slide } from '@mui/material';
 
 const AdminProducts = () => {
   const [products, setProducts] = useState([]);
@@ -25,9 +26,31 @@ const AdminProducts = () => {
   }, []);
 
   const navigate = useNavigate()
+  const [notificationMessage , setNotificationMessage] = useState("")
+  const [notificationOpen,setNotificationOpen] = useState(false)
+  const [severity, setSeverity] = useState("error")
+
+  const notificationAction = () => {
+    setNotificationOpen(false)
+  }
+
+  const deleteProduct = (id) => {
+    let tempProducts = products.filter(item => item.productId != id)
+    setProducts(tempProducts)
+    setSeverity("success")
+    setNotificationOpen(true)
+    setNotificationMessage("Product Deleted Successfully")
+  }
 
   return (
     <div className="flex h-screen w-screen overflow-hidden">
+
+      <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
+        <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
+          {notificationMessage}
+        </Alert>
+      </Snackbar>
+
       <div className="h-full">
         <Sidebar />
       </div>
@@ -58,7 +81,7 @@ const AdminProducts = () => {
             <p className="text-center text-white">No products available</p>
           ) : (
             products.map((product,index) => (
-              <ProductCard key={index} item={product} />
+              <ProductCard key={index} item={product} onDelete={deleteProduct}/>
             ))
           )}
         </div>

@@ -79,3 +79,18 @@ exports.updateProduct = async (req,res) => {
         console.log(err)
     }
 }
+
+exports.deleteProduct = async (req,res) => {
+    try{
+        const {productId} = req.params
+        productModel.deleteOne({productId : productId})
+        .then((result) => {
+            res.json("Success")
+        }).catch((err) => {
+            res.statsu(401).json(err)
+        });
+    }
+    catch (err) {
+        console.log(err)
+    }
+}

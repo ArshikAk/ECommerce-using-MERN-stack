@@ -1,12 +1,18 @@
 import { FaHome, FaBox, FaShoppingCart, FaCog } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../RouteProtectors/AuthContext';
 
 const Sidebar = () => {
 
   const location = useLocation()
+  const {logOut} = useAuth()
 
   const selectedTabStyle = (path) => {
     return location.pathname === path ? 'flex items-center p-3 bg-gray-700 text-white rounded-md' : 'flex items-center p-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md'
+  }
+
+  const handleLogOut = () => {
+    logOut()
   }
 
   return (
@@ -30,7 +36,7 @@ const Sidebar = () => {
           Orders
         </Link>
 
-        <Link className={selectedTabStyle("/admin/settings")} onClick={() => localStorage.removeItem("token")} >
+        <Link className={selectedTabStyle("/admin/settings")} onClick={() => handleLogOut()} >
           <FaCog className="mr-3" />
           LogOut
         </Link>

@@ -2,14 +2,30 @@
 import { CiMenuBurger } from "react-icons/ci";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item , onDelete }) => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const navigate = useNavigate()
+    let token = localStorage.getItem("token")
+    let config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
 
     const handleDelete = () => {
-        console.log("Delete product:", item.name);
+        axios.delete(`http://localhost:8000/api/admin/deleteProduct/${item.productId}`,config)
+        .then((result) => {
+          if(result.data == "Success")
+          {
+            onDelete(item.productId)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
         setIsDropdownOpen(false);
     };
 

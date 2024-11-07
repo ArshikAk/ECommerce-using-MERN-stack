@@ -1,6 +1,7 @@
 import {Routes , Route} from "react-router-dom"
 
-import ProtectedRoute from "./Components/ProtectedRoute"
+import ProtectedAdminRoute from "./RouteProtectors/ProtectedAdminRoute"
+import ProtectedUserRoute from "./RouteProtectors/ProtectedUserRoute"
 
 
 import Login from "./Pages/Login"
@@ -29,26 +30,33 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+      
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-      <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
-      <Route path="/checkout" element={<ProtectedRoute><CheckOut /></ProtectedRoute>} />
-      <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-      <Route path="/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
-      <Route path="/products/:category?" element={<ProtectedRoute><Products/></ProtectedRoute>} />
-      <Route path="/productdetail/:id" element={<ProtectedRoute><ViewProduct /></ProtectedRoute>} />
-      <Route path="/ordersuccess" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} />
-      <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-      <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
       <Route path="*" element={<ErrorPage />} />
 
-      <Route path="/admin/dashboard" element={<Dashboard/>}/>
-      <Route path="/admin/products" element={<AdminProducts/>}/>
-      <Route path="/admin/orders" element={<AdminOrders/>}/>
-      <Route path="/admin/addProduct" element={<AddProduct/>}/>
-      <Route path="/admin/updateProduct/:id" element={<UpdateProduct/>}/>
+
+      <Route path="/" element={<ProtectedUserRoute/>} >
+        <Route path="/" element={<Home />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="wishlist" element={<Wishlist />} />
+        <Route path="checkout" element={<CheckOut />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="products" element={<Products/>} />
+        <Route path="productdetail/:id" element={<ViewProduct />} />
+        <Route path="ordersuccess" element={<OrderSuccess />} />
+        <Route path="orders" element={<Orders />} />
+        <Route path="account" element={<Account />} />
+      </Route>
+
+      <Route path="/admin" element={<ProtectedAdminRoute/>}>
+        <Route path="dashboard" element={<Dashboard/>}/>
+        <Route path="products" element={<AdminProducts/>}/>
+        <Route path="orders" element={<AdminOrders/>}/>
+        <Route path="addProduct" element={<AddProduct/>}/>
+        <Route path="updateProduct/:id" element={<UpdateProduct/>}/>
+      </Route>
     </Routes>
   )
 }

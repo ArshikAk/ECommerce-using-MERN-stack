@@ -1,66 +1,121 @@
-import { useEffect, useState } from "react"
-import CategoryBar from "../Components/CategoryBar"
-import Footer from "../Components/Footer"
-import LanguageBar from "../Components/LanguageBar"
-import Navbar from "../Components/Navbar"
-import ProductCard from "../Components/ProductCard"
-import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import Footer from "../Components/Footer";
+import LanguageBar from "../Components/LanguageBar";
+import Navbar from "../Components/Navbar";
+import ProductCard from "../Components/ProductCard";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Products = () => {
+  const [products, setProducts] = useState(null);
+  const [search, setSearch] = useState("");
 
-    const [products , setProducts] = useState(null)
-    const [search , setSearch] = useState("")
-    const {category} = useParams()
+  const location = useLocation()
+  const {category} = location.state || null
 
-
-    useEffect(() => {
-      axios.get("http://localhost:8000/api/product/getProducts")
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/product/getProducts")
       .then((res) => {
-        if(category != undefined)
-        {
-          const filteredProducts = res.data.filter((product) => product.category.toLowerCase().includes(category.toLowerCase()))
-          setProducts(filteredProducts)
-        }
-        else{
-          setProducts(res.data)
-        }
+        setProducts(res.data);
       })
       .catch((err) => {
-        console.log(err)
-      })
-    },[category])
-    
+        console.log(err);
+      });
+  }, []);
+
+  const [selectedCategories, setSelectedCategories] = useState({
+    "men's clothing": false,
+    "women's clothing": false,
+    electronics: false,
+    jewelery: false,
+  });
+
+  const handleCheckboxChange = (category) => {
+    setSelectedCategories((prevCategories) => ({
+      ...prevCategories,
+      [category]: !prevCategories[category],
+    }));
+  };
+
+  useEffect(() => {
+    if(category)
+    {
+      setSelectedCategories((prevCategories) => ({...prevCategories,[category]: true,}));
+    }
+  },[category])
+
+  const filteredProducts = products
+    ? products
+        .filter((item) => {
+          const itemCategory = item.category.toLowerCase();
+          const activeCategories = Object.keys(selectedCategories).filter((category) => selectedCategories[category]);
+          if (activeCategories.length === 0) 
+            return true;
+          return activeCategories.includes(itemCategory);
+        })
+        .filter((item) =>
+          item.name.toLowerCase().includes(search.toLowerCase())
+        )
+    : [];
+
   return (
     <div>
-      <LanguageBar/>
-      <Navbar/>
-      <CategoryBar category={category} />
+      <LanguageBar />
+      <Navbar />
+
+      <div className="border-b border-gray-300 border-solid py-5 w-full flex justify-center items-center">
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search"
+          className="border border-gray-500 border-solid w-[60%] py-1 rounded-2xl px-5"
+        />
+      </div>
 
       <div className="my-10 flex">
+        
+        <div className="w-[20%] border-r border-gray-400 border-solid flex justify-center relative">
 
-        <div className="w-[20%] border-r border-gray-400 border-solid relative flex justify-center items-start">
+          <div className="w-[80%] mx-[10%]">
 
-            <div className="w-[90%] mx-[5%] sticky top-10">
-                <h1 className="my-3 text-xl  font-bold">Search Products</h1>
-                <input type="text" className="border border-black border-solid w-[80%] rounded h-[35px] bg-gray-200 pl-5 text-black" placeholder="Search" onChange={(e) => setSearch(e.target.value)} />
+            <h1 className="my-3 text-xl font-bold sticky top-10">Filters</h1>
+
+            <div className="border border-gray-500 border-solid mt-10 p-5 sticky top-24">
+
+              <h1 className="text-xl my-3 text-black">CATEGORIES</h1>
+              {Object.keys(selectedCategories).map((category) => (
+                <label key={category} className="flex items-center space-x-2 ml-3 my-1">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories[category]}
+                    onChange={() => handleCheckboxChange(category)}
+                    className="form-checkbox text-black"
+                  />
+                  <span>{category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                </label>
+              ))}
             </div>
 
+          </div>
+
         </div>
 
-        <div className="w-[80%] flex justify-evenly items-center flex-wrap">
-            {products &&
-                products.filter(item => item.name.toLowerCase().includes(search.toLowerCase())).map((product, index) => {
-                    return (
-                        <ProductCard key={index} product={product} />
-                    )
-                })
-            }
+        <div className="w-[80%] flex justify-evenly items-center flex-wrap" style={filteredProducts.length == 0 ? {display : "none"} : {display : "flex"}} >
+          {filteredProducts.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
         </div>
+
+        <div className="w-[80%] flex justify-evenly items-center flex-wrap" style={filteredProducts.length == 0 ? {display : "flex"} : {display : "none"}} >
+          <h1 className="text-2xl font-bold">No Products Found.</h1>
+        </div>
+
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

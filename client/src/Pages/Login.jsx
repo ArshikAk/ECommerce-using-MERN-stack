@@ -9,10 +9,15 @@ import { useState } from "react"
 
 import { Snackbar, Alert, Slide } from '@mui/material';
 
+import { useAuth } from "../RouteProtectors/AuthContext"
+
+
 const Login = () => {
 
   const [email , setEmail] = useState("")
   const [password , setPassword] = useState("")
+
+  const { login } = useAuth()
 
   const [notificationMessage , setNotificationMessage] = useState("")
   const [notificationOpen,setNotificationOpen] = useState(false)
@@ -50,13 +55,25 @@ const Login = () => {
       .then(async (res) => {
         if(res.data.message == "Success")
         {
+          
           localStorage.setItem("token",res.data.token)
+          console.log(res.data.user)
+          await login(res.data.user)
+
           setSeverity("success")
           setNotificationOpen(true)
           setNotificationMessage("Login Successfully Completed")
+
           setTimeout(() => {
-            navigate("/")
+            if(res.data.user.role == "admin")
+            {
+              navigate("/admin/dashboard")
+            }
+            else{
+              navigate("/")
+            }
           },2000)
+
         }
         else if(res.data == "User Not Found" || res.data == "Invalid Password")
         {
