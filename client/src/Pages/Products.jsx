@@ -13,10 +13,12 @@ const Products = () => {
 
   const location = useLocation()
   
-  if(location.state)
-  {
-    setCategory(location.state)
-  }
+  useEffect(() => {
+    if(location.state)
+      {
+        setCategory(location.state.category)
+      }
+  },[location])
 
   useEffect(() => {
     axios
