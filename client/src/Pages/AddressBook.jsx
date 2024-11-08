@@ -28,6 +28,11 @@ const AddressBook = () => {
 
     const [openAddAddress,setOpenAddAddress] = useState(false)
 
+    const [index,setIndex] = useState(null)
+    const [openEditAddress, setOpenEditAddress] = useState(false)
+
+    const [refresh,setRefresh] = useState(0)
+
     const notificationAction = () => {
         setNotificationOpen(false)
     }
@@ -43,12 +48,19 @@ const AddressBook = () => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/address/getAddress",config)
         .then((result) => {
-            setAddresses(result.data)
+            if(result.data == "No address found")
+            {
+                setAddress(null)
+            }
+            else
+            {
+                setAddresses(result.data)
+            }
         })
         .catch((err) => {
             console.log(err)
         })
-    },[])
+    },[refresh])
 
     const addAddress = () => {
 
@@ -61,7 +73,19 @@ const AddressBook = () => {
                 setSeverity("success")
                 setNotificationMessage("Address added successfully");
                 setNotificationOpen(true);
+
                 setOpenAddAddress(false)
+                setOpenEditAddress(false)
+
+                setName("")
+                setEmail("")
+                setPhone(null)
+                setAddress("")
+                setCity("")
+                setLandMark("")
+                setPincode(null)
+
+                setRefresh(refresh + 1)
             }
         })
         .catch((err) => {
@@ -69,6 +93,70 @@ const AddressBook = () => {
         })
     }
 
+    const onEdit = (index) => {
+
+        setIndex(index)
+
+        setName(addresses[index].name)
+        setEmail(addresses[index].email)
+        setPhone(addresses[index].phone)
+        setAddress(addresses[index].address)
+        setCity(addresses[index].city)
+        setLandMark(addresses[index].landMark)
+        setPincode(addresses[index].pincode)
+
+        setOpenAddAddress(true)
+        setOpenEditAddress(true)
+    }
+
+    const updateAddress = () => {
+        axios.put("http://localhost:8000/api/address/updateAddress",{name,email,phone,address,city,landmark,pincode,index},config)
+        .then((result) => {
+            if(result.data == "Success")
+            {
+                setSeverity("success")
+                setNotificationMessage("Address updated successfully");
+                setNotificationOpen(true)
+
+                setOpenAddAddress(false)
+                setOpenEditAddress(false)
+
+                setName("")
+                setEmail("")
+                setPhone("")
+                setAddress("")
+                setCity("")
+                setLandMark("")
+                setPincode("")
+
+                setRefresh(refresh + 1)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    const onDelete = (index) => {
+
+        axios.delete(`http://localhost:8000/api/address/deleteAddress/${index}`,config)
+        .then((result) => {
+            if(result.data == "Success")
+            {
+                setSeverity("success")
+                setNotificationMessage("Address deleted successfully");
+                setNotificationOpen(true)
+
+                setOpenAddAddress(false)
+                setOpenEditAddress(false)
+
+                setRefresh(refresh + 1)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
 
   return (
@@ -100,12 +188,18 @@ const AddressBook = () => {
                 <div className="flex flex-col" style={openAddAddress == true ? {display : "none"} : {display : "flex"}}>
                     {
                         addresses && addresses.map((item,index) => {
-                            return <AddressCard key={index} item={item}/>
+                            return <AddressCard key={index} index={index} item={item} onEdit={onEdit} onDelete={onDelete} />
                         })
                     }
                 </div>
 
-                <div className="w-full" style={openAddAddress == false ? {display : "none"} : {display : "block"}}>
+                {
+                    addresses == null && (!openAddAddress) ? <p className="my-5 flex justify-center item text-xl" >No Address Found</p> : ""
+                }
+
+                <div className="w-[80%] mx-auto my-10 rounded-lg py-5 border border-black border-solid" style={openAddAddress == false ? {display : "none"} : {display : "block"}}>
+
+                    <h3 className="text-xl font-semibold mx-10" >{openEditAddress ?  "Edit Address" : "Add New Address"}</h3>
 
                     <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                         <label className='text-lg text-gray-500 mt-2'>Name</label>
@@ -143,8 +237,11 @@ const AddressBook = () => {
                     </div>
 
                     <div className="flex w-[60%] mx-[20%] justify-evenly mt-10 mb-5 items-center">
-                        <button className="border border-blue-500 border-solid px-10 py-3 bg-blue-500 text-white hover:bg-blue-800" onClick={() => addAddress()} >Save</button>
-                        <button className="border border-black border-solid px-10 py-3 hover:bg-gray-200" onClick={() => setOpenAddAddress(false)} >Cancel</button>
+                        <button className="border border-blue-500 border-solid px-10 py-3 bg-blue-500 text-white hover:bg-blue-800" onClick={() => openEditAddress ? updateAddress() : addAddress()}>{openEditAddress ? "Save Changes" : "Save"}</button>
+                        <button className="border border-black border-solid px-10 py-3 hover:bg-gray-200" onClick={() => {
+                            setOpenAddAddress(false)
+                            setOpenEditAddress(false)
+                        }}>Cancel</button>
                     </div>
 
                 </div>
