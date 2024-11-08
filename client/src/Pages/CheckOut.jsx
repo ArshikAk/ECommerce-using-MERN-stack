@@ -24,6 +24,11 @@ const CheckOut = () => {
     const [address,setAddress] = useState("");
     const [city,setCity] = useState("");
     const [landmark , setLandMark] = useState("")
+    const [pincode , setPincode] = useState()
+
+    const [saveAddress,setSaveAddress] = useState(false)
+
+    const [showSaveOption , setShowSaveOption] = useState(true)
 
     let token = localStorage.getItem("token")
 
@@ -50,15 +55,43 @@ const CheckOut = () => {
           const tot = items.reduce((sum, item) => sum + item.price, 0);
           setTotal(tot);
         }
-      }, [items]);
+    }, [items]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/address/getPrimaryAddress",config)
+        .then((result) => {
+            if(result.data == "No address found")
+            {
+                setSaveAddress(true)
+            }
+            else
+            {
+                setName(result.data.name)
+                setEmail(result.data.email)
+                setPhone(result.data.phone)
+                setAddress(result.data.address)
+                setCity(result.data.city)
+                setLandMark(result.data.landMark)
+                setPincode(result.data.pincode)
+                setShowSaveOption(false)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    },[])
 
 
     const placeOrder = () => {
 
         event.preventDefault()
 
-        axios.post("http://localhost:8000/api/orders/placeOrder",{name,email,phone,address,city,landmark,paymentMethod,items},config)
+        axios.post("http://localhost:8000/api/orders/placeOrder",{name,email,phone,address,city,pincode,landmark,paymentMethod,items},config)
         .then((result) => {
+            if(saveAddress)
+            {
+                addAddress()
+            }
             console.log(result.data)
             navigate("/ordersuccess")
         })
@@ -66,6 +99,21 @@ const CheckOut = () => {
             console.log(err)
         })
     }
+
+    const addAddress = () => {
+
+        event.preventDefault()
+
+        axios.post("http://localhost:8000/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
+        .then((result) => {
+            console.log(result.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    
 
         // const initiatePayment = async (amount) => {
 
@@ -123,37 +171,46 @@ const CheckOut = () => {
 
             <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                 <label className='text-lg text-gray-500 mt-2'>Name</label>
-                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' onChange={(e) => setName(e.target.value)}  />
+                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={name} disabled={!showSaveOption} onChange={(e) => setName(e.target.value)}  />
             </div>
 
             <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                 <label className='text-lg text-gray-500 mt-2'>Address</label>
-                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' onChange={(e) => setAddress(e.target.value)}  />
+                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={address} disabled={!showSaveOption} onChange={(e) => setAddress(e.target.value)}  />
             </div>
 
             <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                 <label className='text-lg text-gray-500 mt-2'>Landmark</label>
-                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' onChange={(e) => setLandMark(e.target.value)}  />
+                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={landmark} disabled={!showSaveOption} onChange={(e) => setLandMark(e.target.value)}  />
             </div>
 
             <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                 <label className='text-lg text-gray-500 mt-2'>Town/City</label>
-                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' onChange={(e) => setCity(e.target.value)}  />
+                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={city} disabled={!showSaveOption} onChange={(e) => setCity(e.target.value)}  />
+            </div>
+
+            <div className='flex flex-col w-[60%] mx-[20%] my-3'>
+                <label className='text-lg text-gray-500 mt-2'>Pincode</label>
+                <input type="number" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={pincode} disabled={!showSaveOption} onChange={(e) => setPincode(e.target.value)}  />
             </div>
 
             <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                 <label className='text-lg text-gray-500 mt-2'>Mobile Number</label>
-                <input type="number" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' onChange={(e) => setPhone(e.target.value)}  />
+                <input type="number" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={phone} disabled={!showSaveOption} onChange={(e) => setPhone(e.target.value)}  />
             </div>
 
             <div className='flex flex-col w-[60%] mx-[20%] my-3'>
                 <label className='text-lg text-gray-500 mt-2'>Email Address</label>
-                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' onChange={(e) => setEmail(e.target.value)}  />
+                <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={email} disabled={!showSaveOption} onChange={(e) => setEmail(e.target.value)}  />
             </div>
 
-            <div className='flex w-[60%] mx-[20%] my-5'>
-                <input type="checkbox"/>
-                <p className='mx-3 font-semibold'>Save this information for future checkout process</p>
+            <div className='flex w-[60%] mx-[20%] my-5' style={showSaveOption == true ? {display : "flex"} : {display : "none"}} >
+                <input type="checkbox" checked={saveAddress} onChange={() => setSaveAddress(!saveAddress)} />
+                <p className='mx-3 font-semibold'>Save this information for future checkout process.</p>
+            </div>
+
+            <div className='flex w-[60%] mx-[20%] my-7 ' style={showSaveOption == false ? {display : "flex"} : {display : "none"}} >
+                <p className='mx-3 font-semibold'>If you want to change address, Go to Account section.</p>
             </div>
         </div>
 

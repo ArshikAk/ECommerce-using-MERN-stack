@@ -18,6 +18,7 @@ import ViewProduct from "./Pages/ViewProduct"
 import OrderSuccess from "./Pages/OrderSuccess"
 import Orders from "./Pages/Orders"
 import Account from "./Pages/Account"
+import AddressBook from "./Pages/AddressBook"
 
 
 import Dashboard from "./Pages/Admin/DashBoard"
@@ -53,6 +54,7 @@ function App() {
         <Route path="ordersuccess" element={<OrderSuccess />} />
         <Route path="orders" element={<Orders />} />
         <Route path="account" element={<Account />} />
+        <Route path="addressbook" element={<AddressBook />} />
       </Route>
 
       <Route path="/admin" element={<ProtectedAdminRoute/>}>

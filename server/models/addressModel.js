@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 
-
 const itemSchema = new mongoose.Schema({
     name : {
         type : String,
@@ -8,17 +7,13 @@ const itemSchema = new mongoose.Schema({
     },
     email : {
         type : String,
-        required : true
+        required : true,
     },
     phone : {
-        type : String,
+        type : Number,
         required : true
     },
     address : {
-        type : String,
-        required : true
-    },
-    city : {
         type : String,
         required : true
     },
@@ -26,37 +21,34 @@ const itemSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    city : {
+        type : String,
+        required : true
+    },
     pincode : {
         type : Number,
-        required : true
-    },
-    paymentMethod : {
-        type : String,
         required : true,
-        enum : ["Cash","Online"]
     },
-    product : {
-        type : Object,
-        required : true
-    },
-    date : {
-        type : String,
-        required : true
+    primary : {
+        type : Boolean,
+        default : false
     }
 })
 
-const orderSchema = new mongoose.Schema({
+
+const addressSchema = new mongoose.Schema({
     email : {
         type : String,
         required : true,
+        unique : true
     },
-    order : {
-        type : itemSchema,
-        default : {}
+    addresses : {
+        type : [itemSchema],
+        default : []
     }
 })
 
 
-const orderModel = mongoose.model("orders",orderSchema)
+const addressModel = mongoose.model("address",addressSchema)
 
-module.exports = orderModel
+module.exports = addressModel

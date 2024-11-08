@@ -9,16 +9,16 @@ import { useLocation } from "react-router-dom";
 const Products = () => {
   const [products, setProducts] = useState(null);
   const [search, setSearch] = useState("");
-  const [category,setCategory] = useState(null)
+  const [category, setCategory] = useState(null);
+  const [sortOption, setSortOption] = useState("relevance");
 
-  const location = useLocation()
+  const location = useLocation();
   
   useEffect(() => {
-    if(location.state)
-      {
-        setCategory(location.state.category)
-      }
-  },[location])
+    if (location.state) {
+      setCategory(location.state.category);
+    }
+  }, [location]);
 
   useEffect(() => {
     axios
@@ -46,24 +46,30 @@ const Products = () => {
   };
 
   useEffect(() => {
-    if(category)
-    {
-      setSelectedCategories((prevCategories) => ({...prevCategories,[category]: true,}));
+    if (category) {
+      setSelectedCategories((prevCategories) => ({
+        ...prevCategories,
+        [category]: true,
+      }));
     }
-  },[category])
+  }, [category]);
 
   const filteredProducts = products
     ? products
         .filter((item) => {
           const itemCategory = item.category.toLowerCase();
           const activeCategories = Object.keys(selectedCategories).filter((category) => selectedCategories[category]);
-          if (activeCategories.length === 0) 
-            return true;
+          if (activeCategories.length === 0) return true;
           return activeCategories.includes(itemCategory);
         })
         .filter((item) =>
           item.name.toLowerCase().includes(search.toLowerCase())
         )
+        .sort((a, b) => {
+          if (sortOption === "priceLowToHigh") return a.price - b.price;
+          if (sortOption === "priceHighToLow") return b.price - a.price;
+          return 0;
+        })
     : [];
 
   return (
@@ -84,13 +90,10 @@ const Products = () => {
       <div className="my-10 flex">
         
         <div className="w-[20%] border-r border-gray-400 border-solid flex justify-center relative">
-
           <div className="w-[80%] mx-[10%]">
-
             <h1 className="my-3 text-xl font-bold sticky top-10">Filters</h1>
 
             <div className="border border-gray-500 border-solid mt-10 p-5 sticky top-24">
-
               <h1 className="text-xl my-3 text-black">CATEGORIES</h1>
               {Object.keys(selectedCategories).map((category) => (
                 <label key={category} className="flex items-center space-x-2 ml-3 my-1">
@@ -104,22 +107,36 @@ const Products = () => {
                 </label>
               ))}
             </div>
+          </div>
+        </div>
 
+        <div className="w-[80%]">
+          <div className="flex justify-end items-center mb-5">
+            <label htmlFor="sort" className="mr-2 font-semibold">Sort by:</label>
+            <select
+              id="sort"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="border border-gray-500 border-solid py-1 px-3 rounded-md mr-10 bg-gray-100"
+            >
+              <option value="relevance">Relevance</option>
+              <option value="priceLowToHigh">Price: Low to High</option>
+              <option value="priceHighToLow">Price: High to Low</option>
+            </select>
           </div>
 
-        </div>
+          <div className="flex justify-evenly items-center flex-wrap" style={filteredProducts.length === 0 ? { display: "none" } : { display: "flex" }}>
+            {filteredProducts.map((product, index) => (
+              <ProductCard key={index} product={product} />
+            ))}
+          </div>
 
-        <div className="w-[80%] flex justify-evenly items-center flex-wrap" style={filteredProducts.length == 0 ? {display : "none"} : {display : "flex"}} >
-          {filteredProducts.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
+          <div className="flex justify-center items-center flex-wrap" style={filteredProducts.length === 0 ? { display: "flex" } : { display: "none" }}>
+            <h1 className="text-2xl font-bold">No Products Found.</h1>
+          </div>
         </div>
-
-        <div className="w-[80%] flex justify-evenly items-center flex-wrap" style={filteredProducts.length == 0 ? {display : "flex"} : {display : "none"}} >
-          <h1 className="text-2xl font-bold">No Products Found.</h1>
-        </div>
-
       </div>
+      
       <Footer />
     </div>
   );

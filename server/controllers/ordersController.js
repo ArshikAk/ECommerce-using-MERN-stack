@@ -21,7 +21,7 @@ exports.getOrders = async (req,res) => {
 exports.placeOrder = async (req,res) => {
     try{
 
-        const {name,email,phone,address,city,landmark,paymentMethod,items} = req.body
+        const {name,email,phone,address,city,landmark,pincode,paymentMethod,items} = req.body
 
         let todayDate = new Date()
 
@@ -45,6 +45,7 @@ exports.placeOrder = async (req,res) => {
                         address : address,
                         city : city,
                         landMark : landmark,
+                        pincode : pincode,
                         paymentMethod : paymentMethod,
                         product : item,
                         date : date
