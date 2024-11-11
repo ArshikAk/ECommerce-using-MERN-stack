@@ -66,6 +66,26 @@ const AddressBook = () => {
 
         event.preventDefault()
 
+        if(addresses.length >= 3)
+        {
+            setSeverity("error")
+            setNotificationMessage("Cannot add more than 3 address");
+            setNotificationOpen(true)
+
+            setOpenAddAddress(false)
+            setOpenEditAddress(false)
+
+            setName("")
+            setEmail("")
+            setPhone("")
+            setAddress("")
+            setCity("")
+            setLandMark("")
+            setPincode("")
+            
+            return
+        }
+
         axios.post("http://localhost:8000/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
         .then((result) => {
             if(result.data == "Success")
@@ -79,11 +99,11 @@ const AddressBook = () => {
 
                 setName("")
                 setEmail("")
-                setPhone(null)
+                setPhone("")
                 setAddress("")
                 setCity("")
                 setLandMark("")
-                setPincode(null)
+                setPincode("")
 
                 setRefresh(refresh + 1)
             }

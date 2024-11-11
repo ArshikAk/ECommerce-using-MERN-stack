@@ -26,8 +26,11 @@ const CheckOut = () => {
     const [landmark , setLandMark] = useState("")
     const [pincode , setPincode] = useState()
 
-    const [saveAddress,setSaveAddress] = useState(false)
+    const [addresses,setAddresses] = useState(null)
+    const [selectedAddress,setSelectedAddress] = useState(0)
+    const [showAddresses, setShowAddresses] = useState(false)
 
+    const [saveAddress,setSaveAddress] = useState(false)
     const [showSaveOption , setShowSaveOption] = useState(true)
 
     let token = localStorage.getItem("token")
@@ -58,28 +61,35 @@ const CheckOut = () => {
     }, [items]);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/address/getPrimaryAddress",config)
+        axios.get("http://localhost:8000/api/address/getAddress",config)
         .then((result) => {
-            if(result.data == "No address found")
+            if(result.data == "No address found" || result.data.length == 0)
             {
                 setSaveAddress(true)
+                setShowAddresses(false)
             }
             else
             {
-                setName(result.data.name)
-                setEmail(result.data.email)
-                setPhone(result.data.phone)
-                setAddress(result.data.address)
-                setCity(result.data.city)
-                setLandMark(result.data.landMark)
-                setPincode(result.data.pincode)
-                setShowSaveOption(false)
+                setShowAddresses(true)
+                setAddresses(result.data)
             }
         })
         .catch((err) => {
             console.log(err)
         })
     },[])
+
+    const handleChange = (index) => {
+        setSelectedAddress(index)
+        setName(addresses[index].name)
+        setEmail(addresses[index].email)
+        setPhone(addresses[index].phone)
+        setAddress(addresses[index].address)
+        setCity(addresses[index].city)
+        setLandMark(addresses[index].landMark)
+        setPincode(addresses[index].pincode)
+
+    }
 
 
     const placeOrder = () => {
@@ -103,6 +113,11 @@ const CheckOut = () => {
     const addAddress = () => {
 
         event.preventDefault()
+
+        if(addresses.length == 3)
+        {
+            return
+        }
 
         axios.post("http://localhost:8000/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
         .then((result) => {
@@ -164,7 +179,7 @@ const CheckOut = () => {
 
       <div className='flex w-full'>
 
-        <div className='w-[50%] border-r border-gray-300 border-solid py-10'>
+        <div className='w-[50%] border-r border-gray-300 border-solid py-10' style={showAddresses == false ? {display : "block"} : {display : "none"}} >
             <div className='w-[60%] mx-[20%] my-3'>
                 <h1 className='text-2xl font-bold'>Billing Details</h1>
             </div>
@@ -204,13 +219,51 @@ const CheckOut = () => {
                 <input type="text" className='border border-gray-300 border-solid mt-2 pl-3 h-10 bg-gray-200 rounded-lg text-black shadow-2xl' value={email} disabled={!showSaveOption} onChange={(e) => setEmail(e.target.value)}  />
             </div>
 
-            <div className='flex w-[60%] mx-[20%] my-5' style={showSaveOption == true ? {display : "flex"} : {display : "none"}} >
+            <div className='flex w-[60%] mx-[20%] my-5'>
                 <input type="checkbox" checked={saveAddress} onChange={() => setSaveAddress(!saveAddress)} />
                 <p className='mx-3 font-semibold'>Save this information for future checkout process.</p>
             </div>
 
-            <div className='flex w-[60%] mx-[20%] my-7 ' style={showSaveOption == false ? {display : "flex"} : {display : "none"}} >
-                <p className='mx-3 font-semibold'>If you want to change address, Go to Account section.</p>
+        </div>
+
+        <div className='w-[50%] border-r border-gray-300 border-solid py-10' style={showAddresses == true ? {display : "block"} : {display : "none"}} >
+            
+            <div className='w-[80%] mx-auto'>
+                <h1 className='my-5 text-2xl font-semibold'>Select Delivery Address</h1>
+
+                {
+                    addresses && addresses.map((item,index) => {
+                        return (
+                            <>
+                            <div className={selectedAddress == index ? 
+                                
+                                "border rounded-lg py-8 px-5 shadow-sm flex items-center relative my-5shadow-2xl border-black" : 
+                                "border border-gray-300 rounded-lg py-8 px-5 shadow-sm flex items-center relative my-5 hover:shadow-2xl hover:border-black "
+                                } 
+                                onClick={() => handleChange(index)} >
+
+                                <input type="radio" name="address" id="" checked={selectedAddress == index} />
+                                <div className='mx-7'>
+                                    <div className="mt-2 flex">
+                                    <p className="font-semibold text-gray-800">{item.name}</p>
+                                    <p className="font-semibold text-gray-800 mx-3">{item.phone}</p>
+                                    </div>
+
+                                    <div className="mt-2">
+                                        <p className="text-gray-500 mt-1">Address - {item.address + "," + item.city + "."}</p>
+                                        <p className="text-gray-500 mt-1">LandMark - {item.landMark}</p>
+                                    </div>
+
+                                    <div className="mt-2">
+                                    <p className="font-semibold text-gray-800">{item.pincode}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </>
+                        )
+                    })
+                }
+
             </div>
         </div>
 
