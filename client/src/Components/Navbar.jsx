@@ -19,10 +19,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-row justify-around items-center py-5 border-b border-gray-300 w-full">
-      <p className="text-xl font-bold cursor-pointer" onClick={() => navigate("/")}>
-        Exclusive
-      </p>
+    <div className="flex flex-row justify-around items-center py-1 border-b border-gray-300 w-full">
+      <div className="flex items-center">
+        <img src={"/logo1.ico"} alt="logo" className="w-[50px] cursor-pointer" onClick={() => navigate("/")} />
+        <p className="text-xl mx-3 font-bold cursor-pointer" onClick={() => navigate("/")}>Exclusive</p>
+      </div>
 
       <div className="flex flex-row justify-evenly items-center mx-10">
         <p className="mx-5 font-semibold cursor-pointer" style={getUnderlineStyle("/")} onClick={() => navigate("/")}>Home</p>

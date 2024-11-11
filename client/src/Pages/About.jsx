@@ -19,7 +19,7 @@ import { SiAdguard } from "react-icons/si";
 
 const About = () => {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <LanguageBar/>
       <Navbar/>
 
@@ -136,7 +136,7 @@ const About = () => {
 
       </div>
       <Footer/>
-    </>
+    </div>
   )
 }
 

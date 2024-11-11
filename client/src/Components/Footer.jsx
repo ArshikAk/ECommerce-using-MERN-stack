@@ -3,7 +3,13 @@
 const Footer = () => {
   return (
     <>
-        <div className="bg-black text-white flex justify-evenly items-start py-10">
+        <div className="bg-black text-white flex justify-evenly items-center py-10">
+
+          <div>
+            <img src={"/logo1.ico"} alt="logo" className="w-[50px]" />
+          </div>
+
+
           <div className="flex flex-col justify-center">
             <p className="py-2 text-xl font-bold">Exclusive</p>
             <p className="py-2 font-semibold">Subscribe</p>
