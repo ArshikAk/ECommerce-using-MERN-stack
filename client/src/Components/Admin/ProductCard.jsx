@@ -30,26 +30,26 @@ const ProductCard = ({ item , onDelete }) => {
     };
 
   return (
-    <div className="flex justify-between items-center border border-gray-300 p-4 px-8 my-3 shadow-lg bg-gray-100 rounded-lg mx-auto relative">
+    <div className="lg:flex lg:justify-between lg:items-center lg:border lg:border-gray-300 lg:p-4 lg:px-8 lg:my-3 lg:shadow-lg lg:bg-gray-100 lg:rounded-lg lg:mx-auto lg:relative">
  
-      <div className="flex items-center w-1/3">
-        <img src={item.image} alt={item.name} className="w-[40px] h-[40px] mx-2 rounded-md" />
-        <p className="font-medium w-[250px] text-sm overflow-hidden text-ellipsis whitespace-nowrap">{item.name}</p>
+      <div className="lg:flex lg:items-center lg:w-1/3">
+        <img src={item.image} alt={item.name} className="lg:w-[40px] lg:h-[40px] lg:mx-2 lg:rounded-md" />
+        <p className="lg:ont-medium lg:w-[250px] lg:text-sm lg:overflow-hidden lg:text-ellipsis lg:whitespace-nowrap">{item.name}</p>
       </div>
       
-      <p className="w-1/4 font-medium text-center text-sm">{item.category}</p>
+      <p className="lg:w-1/4 lg:font-medium lg:text-center lg:text-sm">{item.category}</p>
       
-      <p className="w-1/4 font-medium text-center text-sm">₹{item.price.toFixed(2)}</p>
+      <p className="lg:w-1/4 lg:font-medium lg:text-center lg:text-sm">₹{item.price.toFixed(2)}</p>
       
-      <div className="flex justify-center">
-        <button className="bg-gray-800 text-white px-2 py-1 rounded-md">
+      <div className="lg:flex lg:justify-center">
+        <button className="lg:bg-gray-800 lg:text-white lg:px-2 lg:py-1 lg:rounded-md">
           <CiMenuBurger size={14} onClick={() => setIsDropdownOpen(!isDropdownOpen)}/>
         </button>
         {isDropdownOpen && (
-          <div className="absolute right-20 -top-5 mt-4 w-24 bg-white border border-gray-300 rounded-lg shadow-lg z-30">
+          <div className="lg:absolute lg:right-20 lg:-top-5 lg:mt-4 lg:w-24 lg:bg-white border lg:border-gray-300 lg:rounded-lg lg:shadow-lg lg:z-30">
             <ul>
-              <li className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick = {() => navigate(`/admin/updateProduct/${item.productId}`)}>Edit</li>
-              <li onClick={handleDelete} className="px-4 py-2 text-sm text-red-500 hover:bg-gray-100 cursor-pointer">Delete</li>
+              <li className="lg:px-4 lg:py-2 lg:text-sm lg:text-gray-700 lg:hover:bg-gray-100 cursor-pointer" onClick = {() => navigate(`/admin/updateProduct/${item.productId}`)}>Edit</li>
+              <li onClick={handleDelete} className="lg:px-4 lg:py-2 lg:text-sm lg:text-red-500 lg:hover:bg-gray-100 lg:cursor-pointer">Delete</li>
             </ul>
           </div>
         )}

@@ -105,20 +105,20 @@ const ViewProduct = () => {
         </Alert>
       </Snackbar>
 
-      <div className="flex justify-center items-center my-32">
+      <div className="flex flex-col lg:flex-row justify-center items-center my-10 lg:my-32">
 
-        <div className="mx-10 flex flex-col">
+        <div className="lg:mx-10 flex lg:flex-col overflow-scroll">
             <img src={product.image} alt="" className="w-[100px] h-[100px] my-3 border border-black border-solid p-5 cursor-pointer" />
             <img src={product.image} alt="" className="w-[100px] h-[100px] my-3 border border-black border-solid p-5 cursor-pointer" />
             <img src={product.image} alt="" className="w-[100px] h-[100px] my-3 border border-black border-solid p-5 cursor-pointer" />
             <img src={product.image} alt="" className="w-[100px] h-[100px] my-3 border border-black border-solid p-5 cursor-pointer" />
         </div>
 
-        <div className="mx-10">
-            <img src={product.image} alt="" className="w-[500px] h-[500px]"  />
+        <div className="my-10 lg:mx-10">
+            <img src={product.image} alt="" className="w-[250px] h-[250px] lg:w-[500px] lg:h-[500px]"  />
         </div>
 
-        <div className="flex flex-col w-[25%] mx-20" >
+        <div className="flex flex-col lg:w-[25%] mx-5 lg:mx-20">
             <div className="border-b border-gray-400 border-solid pb-5">
                 <h1 className="text-xl font-bold my-2" >{product.name}</h1>
                 <h3 className="text-2xl my-2" >₹{product.price}</h3>

@@ -100,28 +100,30 @@ const Login = () => {
         </Alert>
       </Snackbar>
 
-      <div className="flex w-[100vw]">
+      <div className="flex w-[100vw] py-[10%]">
 
-        <div className="w-[50vw] h-[750px]">
+        <div className="hidden lg:w-[50vw] lg:h-[750px]">
           <img src={image} alt="Login Image" className="w-full h-full"/>
         </div>
 
-        <div className="w-[50vw] h-[750px] flex flex-col justify-center items-center">
-          <div className="w-[50%]">
+        <div className="w-[100vw] p-[10%] lg:w-[50vw] lg:h-[750px] flex flex-col justify-center lg:items-center">
+          <div className="lg:w-[50%]">
             <p className="my-3 text-3xl font-bold">Login to Exclusive</p>
-            <p className="my-3">Enter your details below</p>
+            <p className="hidden lg:block my-3">Enter your details below</p>
           </div>
 
-          <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setEmail(e.target.value)} />
+          <input type="text" placeholder="Email" className="border border-black p-2 lg:border-b lg:border-gray-400 border-solid lg:w-[50%] my-5" onChange={(e) => setEmail(e.target.value)} />
 
-          <input type="password" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" placeholder="Password" className="border border-black p-2 lg:border-b lg:border-gray-400 border-solid lg:w-[50%] my-5" onChange={(e) => setPassword(e.target.value)} />
 
-          <div className="flex justify-between items-center w-[50%] mx-5">
+
+          <div className="flex justify-between items-center lg:w-[50%] lg:mx-5">
             <button className="bg-red-500 text-white p-3 px-10 my-5" onClick={() => submitHandler()}>Login</button>
             <p className="text-red-500 cursor-pointer" onClick={() => navigate("/otpemail")} >Forget Password?</p>
           </div>
 
-          <p className="text-gray-400">Don&apos;t have account? <Link to={"/register"} className="text-black underline">Register</Link></p>
+          <p className="text-gray-400 my-5">Don&apos;t have account? <Link to={"/register"} className="text-black underline">Register</Link></p>
+          
         </div>
       </div>
 

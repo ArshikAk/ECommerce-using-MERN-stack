@@ -9,20 +9,20 @@ const AddressCard = ({ item , index, onEdit, onDelete }) => {
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <div className="border border-gray-300 rounded-lg p-8 shadow-sm flex items-start justify-between relative my-5 hover:shadow-2xl hover:border-black">
+    <div className="border border-gray-300 lg:rounded-lg lg:p-8 shadow-sm flex items-start justify-between relative lg:my-5 hover:shadow-2xl hover:border-black">
       <div>
 
-        <div className="mt-2 flex">
+        <div className="lg:mt-2 flex">
           <p className="font-semibold text-gray-800">{item.name}</p>
-          <p className="font-semibold text-gray-800 mx-3">{item.phone}</p>
+          <p className="font-semibold text-gray-800 lg:mx-3">{item.phone}</p>
         </div>
 
-        <div className="flex mt-2">
+        <div className="flex lg:mt-2">
             <p className="text-gray-500">Address - {item.address + ", " + item.city + "."}</p>
-            <p className="text-gray-500 mx-2">LandMark - {item.landMark}</p>
+            <p className="text-gray-500 lg:mx-2">LandMark - {item.landMark}</p>
         </div>
 
-        <div className="mt-2">
+        <div className="lg:mt-2">
           <p className="font-semibold text-gray-800">{item.pincode}</p>
         </div>
 
@@ -36,24 +36,24 @@ const AddressCard = ({ item , index, onEdit, onDelete }) => {
         />
 
         {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+          <div className="absolute lg:right-0 lg:mt-2 lg:w-32 bg-white border border-gray-200 lg:rounded-lg shadow-lg z-10">
             <button
               onClick={() => {
                 toggleDropdown()
                 onEdit(index)
               }}
-              className="flex items-center px-4 py-2 w-full text-gray-700 hover:bg-gray-100 hover:text-red-500"
+              className="flex items-center lg:px-4 lg:py-2 w-full text-gray-700 hover:bg-gray-100 hover:text-red-500"
             >
-              <MdEdit className="mr-2" /> Edit
+              <MdEdit className="lg:mr-2" /> Edit
             </button>
             <button
               onClick={() => {
                 toggleDropdown()
                 onDelete(index)
               }}
-              className="flex items-center px-4 py-2 w-full text-gray-700 hover:bg-gray-100 hover:text-red-500"
+              className="flex items-center lg:px-4 lg:py-2 w-full text-gray-700 hover:bg-gray-100 hover:text-red-500"
             >
-              <MdDelete className="mr-2" /> Delete
+              <MdDelete className="lg:mr-2" /> Delete
             </button>
           </div>
         )}

@@ -75,7 +75,7 @@ const Wishlist = () => {
         <button className="p-3 px-10 my-5 border border-black border-solid hover:bg-gray-300 transition-colors" onClick={() => addToCart()} >Add all to Cart</button>
       </div>
 
-      <div className="w-[80%] mx-[10%] min-h-[50%]  overflow-y-auto prod-hori">
+      <div className="lg:w-[80%] mx-5 lg:mx-[10%] min-h-[50%]  overflow-y-auto prod-hori">
         {items && items.length > 0 ? (
           items.map((item, index) => {
             return (

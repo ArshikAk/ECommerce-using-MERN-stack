@@ -2,7 +2,7 @@
 
 const CheckOutCard = ({item}) => {
   return (
-    <div className="flex justify-between items-center my-3">
+    <div className="flex justify-between items-center my-3 w-full">
 
       <div className="flex items-center w-[50%]">
         <img src={item.image} alt="Asus Tuf PC" className="w-[50px] h-[50px] " />

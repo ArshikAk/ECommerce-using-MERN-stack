@@ -173,11 +173,11 @@ const CheckOut = () => {
 
 
   return (
-    <div>
+    <div className='w-[100vw] overflow-x-hidden'>
       <LanguageBar/>
       <Navbar/>
 
-      <div className='flex w-full'>
+      <div className='flex flex-wrap w-full'>
 
         <div className='w-[50%] border-r border-gray-300 border-solid py-10' style={showAddresses == false ? {display : "block"} : {display : "none"}} >
             <div className='w-[60%] mx-[20%] my-3'>
@@ -226,19 +226,19 @@ const CheckOut = () => {
 
         </div>
 
-        <div className='w-[50%] border-r border-gray-300 border-solid py-10' style={showAddresses == true ? {display : "block"} : {display : "none"}} >
+        <div className='lg:w-[50%] border-r border-gray-300 border-solid py-10' style={showAddresses == true ? {display : "block"} : {display : "none"}} >
             
-            <div className='w-[80%] mx-auto'>
+            <div className='mx-3 lg:w-[80%] lg:mx-auto w-full'>
                 <h1 className='my-5 text-2xl font-semibold'>Select Delivery Address</h1>
 
-                {
+                <div className='flex flex-col h-[250px] overflow-auto lg:h-auto lg:block lg:overflow-hidden'>
+                    {
                     addresses && addresses.map((item,index) => {
                         return (
                             <>
                             <div className={selectedAddress == index ? 
-                                
-                                "border rounded-lg py-8 px-5 shadow-sm flex items-center relative my-5shadow-2xl border-black" : 
-                                "border border-gray-300 rounded-lg py-8 px-5 shadow-sm flex items-center relative my-5 hover:shadow-2xl hover:border-black "
+                                "border rounded-lg py-8 px-5 flex items-center relative my-5 shadow-xl border-black lg:mx-3 w-[80%] lg:w-[90%] mx-auto" : 
+                                "border border-gray-300 rounded-lg py-8 px-5 shadow-sm flex items-center relative my-5 hover:shadow-2xl hover:border-black lg:mx-3 w-[80%] lg:w-[90%] mx-auto"
                                 } 
                                 onClick={() => handleChange(index)} >
 
@@ -250,8 +250,8 @@ const CheckOut = () => {
                                     </div>
 
                                     <div className="mt-2">
-                                        <p className="text-gray-500 mt-1">Address - {item.address + "," + item.city + "."}</p>
-                                        <p className="text-gray-500 mt-1">LandMark - {item.landMark}</p>
+                                        <p className="text-gray-500 text-sm lg:text-base mt-1">Address - {item.address + "," + item.city + "."}</p>
+                                        <p className="text-gray-500 text-sm lg:text-base mt-1">LandMark - {item.landMark}</p>
                                     </div>
 
                                     <div className="mt-2">
@@ -263,12 +263,13 @@ const CheckOut = () => {
                         )
                     })
                 }
+                </div>
 
             </div>
         </div>
 
-        <div className='w-[50%] flex flex-col justify-center items-center'>
-            <div className='flex flex-col w-[60%] my-3 mt-10'>
+        <div className='w-[85%] mx-auto lg:w-[50%] flex flex-col lg:justify-center lg:items-center'>
+            <div className='flex flex-col lg:w-[60%] lg:my-3 lg:mt-10'>
                 {items &&
                     items.map((item , index) => {
                         return (<CheckOutCard key={index} item={item} />)
@@ -276,7 +277,7 @@ const CheckOut = () => {
                 }
             </div>
 
-            <div className="w-[60%]" >
+            <div className="lg:w-[60%]" >
 
                 <div className="flex justify-between py-3 my-2 border-b border-gray-300 border-solid">
                     <p className="font-semibold">SubTotal</p>
@@ -307,12 +308,12 @@ const CheckOut = () => {
             </div>
           </div>
 
-          <div className='w-[60%]'>
+          <div className='hidden lg:block w-[60%]'>
             <input type="text" className="border border-black border-solid p-2 pl-3 pr-10" placeholder="Enter Coupon" />
             <button className="p-2 px-10 my-5 border border-red-500 border-solid text-white bg-red-500 mx-5">Apply Coupon</button>
           </div>
 
-          <div className='w-[60%] flex justify-end my-5'>
+          <div className='lg:w-[60%] flex justify-center items-center lg:justify-end my-5'>
             <button className="p-2 px-10 my-5 border border-red-500 border-solid text-white bg-red-500" onClick={() => placeOrder()}>Place Order</button>
           </div>
 

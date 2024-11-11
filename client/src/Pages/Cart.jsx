@@ -65,19 +65,19 @@ const Cart = () => {
 
       <div className="py-5 bg-gray-100">
 
-      <div className="w-[80%] mx-auto p-5 my-5 shadow-2xl bg-gray-200 rounded-lg">
-          <div className="grid grid-cols-5 gap-4 items-center">
+      <div className="hidden lg:block lg:w-[80%] mx-auto p-5 my-5 shadow-2xl bg-gray-200 rounded-lg">
+          <div className="flex justify-between lg:grid lg:grid-cols-5 gap-4 items-center">
             <p className="font-semibold text-center">Product</p>
             <p className="font-semibold text-center">Price</p>
-            <p className="font-semibold text-center">Quantity</p>
+            <p className="hidden lg:block font-semibold text-center">Quantity</p>
             <p className="font-semibold text-center">SubTotal</p>
             <p className="font-semibold text-center">More</p>
           </div>
       </div>
 
+      <h1 className="mx-5 lg:hidden text-xl font-semibold">Cart</h1>
 
-
-        <div className="w-[80%] mx-auto">
+        <div className="mx-5 lg:w-[80%] lg:mx-auto">
           {cartitems &&
             cartitems.map((product, index) => {
               return (
@@ -87,7 +87,7 @@ const Cart = () => {
           }
         </div>
 
-        <div className="flex justify-between items-center w-[80%] mx-auto my-10">
+        <div className="flex flex-wrap justify-center lg:justify-between items-center w-[80%] mx-auto my-10">
           <button className="p-3 px-10 my-5 border border-black hover:bg-gray-300 transition-colors" onClick={() => navigate("/" ,)} >
             Return to Home
           </button>
@@ -96,13 +96,13 @@ const Cart = () => {
           </button>
         </div>
 
-        <div className="flex justify-between items-center w-[80%] mx-auto my-10">
-          <div>
+        <div className="flex flex-wrap justify-between items-center lg:w-[80%] mx-[10%] lg:mx-auto lg:my-10">
+          <div className="hidden lg:block">
             <input type="text" className="border border-black border-solid p-2 px-10" placeholder="Enter Coupon" />
-            <button className="p-2 px-10 my-5 border border-red-500 border-solid text-white bg-red-500 mx-5">Apply Coupon</button>
+            <button className="p-2 px-10 my-5 border border-red-500 border-solid text-white bg-red-500 lg:mx-5">Apply Coupon</button>
           </div>
 
-          <div className="border border-black border-solid p-5 w-[30%]" >
+          <div className="border border-black border-solid p-5 w-[100%] lg:w-[30%]" >
 
             <p className="text-xl font-bold">Cart Total</p>
 

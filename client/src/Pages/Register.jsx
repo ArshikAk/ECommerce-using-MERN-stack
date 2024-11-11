@@ -91,23 +91,23 @@ const Register = () => {
 
       <div className="flex w-[100vw] overflow-x-hidden">
 
-        <div className="w-[50vw] h-[750px]">
+        <div className="hidden lg:block lg:w-[50vw] lg:h-[750px]">
           <img src={image} alt="Login Image" className="w-full h-full"/>
         </div>
 
-        <div className="w-[50vw] h-[750px] flex flex-col justify-center items-center">
-          <div className="w-[50%]">
+        <div className="p-[10%] w-full lg:w-[50vw] lg:h-[750px] flex flex-col justify-center items-center">
+          <div className="lg:w-[50%]">
             <p className="my-3 text-3xl font-bold">Create an Account</p>
             <p className="my-3">Enter your details below</p>
           </div>
 
-          <input type="text" placeholder="Name" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setName(e.target.value) } />
+          <input type="text" placeholder="Name" className="w-[80%] border border-black p-2 lg:border-b lg:border-gray-400 border-solid lg:w-[50%] my-5" onChange={(e) => setName(e.target.value) } />
 
-          <input type="text" placeholder="Email" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setEmail(e.target.value) } />
+          <input type="text" placeholder="Email" className="w-[80%] border border-black p-2 lg:border-b lg:border-gray-400 border-solid lg:w-[50%] my-5" onChange={(e) => setEmail(e.target.value) } />
 
-          <input type="password" placeholder="Password" className="border-b border-gray-400 border-solid w-[50%] my-5" onChange={(e) => setPassword(e.target.value) } />
+          <input type="password" placeholder="Password" className="w-[80%] border border-black p-2 lg:border-b lg:border-gray-400 border-solid lg:w-[50%] my-5" onChange={(e) => setPassword(e.target.value) } />
 
-          <button className="w-[50%] bg-red-500 text-white py-3 my-5" onClick={() => submitHandler()} >Create Account</button>
+          <button className="w-[80%]  lg:w-[50%] bg-red-500 text-white py-3 my-5" onClick={() => submitHandler()} >Create Account</button>
 
           <p className="text-gray-400">Already have account? <Link to={"/login"} className="text-black underline">Login In</Link></p>
         </div>

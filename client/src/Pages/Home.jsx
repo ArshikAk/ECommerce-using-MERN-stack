@@ -52,7 +52,7 @@ const Home = () => {
         <Navbar/>
 
         <div className="flex w-full border-b border-gray-400 border-solid">
-          <div className="w-[20%] p-20 border-r border-gray-400 border-solid flex flex-col justify-center">
+          <div className="hidden w-[20%] p-20 border-r border-gray-400 border-solid lg:flex flex-col justify-center">
             <p className="my-3 font-bold text-lg cursor-pointer">Woman&apos;s Fashion</p>
             <p className="my-3 font-bold text-lg cursor-pointer">Men&apos;s Fashion</p>
             <p className="my-3 font-bold text-lg cursor-pointer">Electronics</p>
@@ -64,7 +64,7 @@ const Home = () => {
             <p className="my-3 font-bold text-lg cursor-pointer">Health & Beauty</p>
           </div>
 
-          <div className="w-[80%] p-20">
+          <div className="h-full lg:w-[80%] lg:p-20">
             <SlideShow/>
           </div>
         </div>
@@ -77,9 +77,9 @@ const Home = () => {
             <p className="font-bold m-3">Today&apos;s</p>
           </div>
 
-          <h1 className="text-red-500 font-bold text-3xl my-3">Flash Sales</h1>
+          <h1 className="text-xl text-red-500 font-bold lg:text-3xl my-3">Flash Sales</h1>
 
-          <div className="my-5 flex overflow-x-auto space-x-4 prod-hori">
+          <div className="my-5 flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal items-center overflow-x-auto lg:space-x-4 prod-hori">
           { products && 
             products.filter(item => randomNumbers1.includes(item.productId)).map((item, index) => (
                     <div key={index} className="flex-shrink-0">
@@ -104,34 +104,34 @@ const Home = () => {
             <p className="font-bold m-3">Categories</p>
           </div>
 
-          <h1 className="text-red-500 font-bold text-3xl my-3">Browse by Categories</h1>
+          <h1 className="text-xl text-red-500 font-bold lg:text-3xl my-3">Browse by Categories</h1>
 
-          <div className="my-10 flex justify-around items-center prod-hori">
+          <div className="my-10 flex flex-wrap justify-around items-center prod-hori">
 
-            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "men's clothing"}})}  >
+            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[150px] h-[150px] my-5 lg:w-[200px] lg:h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "men's clothing"}})}  >
               <GiClothes size={35} className="my-3 group-hover:text-white" />
-              <h1 className="my-3 text-xl group-hover:text-white">Men&apos;s Wear</h1>
+              <h1 className="my-3 lg:text-xl group-hover:text-white">Men&apos;s Wear</h1>
             </div>
 
-            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "women's clothing"}})}  >
+            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[150px] h-[150px] my-5 lg:w-[200px] lg:h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "women's clothing"}})}  >
               <GiTravelDress size={35} className="my-3 group-hover:text-white" />
-              <h1 className="my-3 text-xl group-hover:text-white">Women&apos;s Wear</h1>
+              <h1 className="my-3 lg:text-xl group-hover:text-white">Women&apos;s Wear</h1>
             </div>
 
-            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "electronics"}})}  >
+            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[150px] h-[150px] my-5 lg:w-[200px] lg:h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "electronics"}})}  >
               <IoPhonePortraitOutline size={35} className="my-3 group-hover:text-white" />
-              <h1 className="my-3 text-xl group-hover:text-white">Electronics</h1>
+              <h1 className="my-3 lg:text-xl group-hover:text-white">Electronics</h1>
             </div>
 
-            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[200px] h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "jewelery"}})}  >
+            <div className="flex flex-col justify-center items-center p-5 border border-solid border-black group hover:bg-red-500 transition-all duration-300 transform group-hover:scale-105 rounded-lg shadow-md hover:shadow-lg w-[150px] h-[150px] my-5 lg:w-[200px] lg:h-[200px] cursor-pointer hover:scale-110 ease-in-out " onClick={() => navigate("/products",{ state : {category : "jewelery"}})}  >
               <GiJewelCrown size={35} className="my-3 group-hover:text-white" />
-              <h1 className="my-3 text-xl group-hover:text-white">Jewelery</h1>
+              <h1 className="my-3 lg:text-xl group-hover:text-white">Jewelery</h1>
             </div>
 
           </div>
 
           <div className="flex justify-center items-center">
-            <button className="bg-red-500 text-white p-3 px-10 my-5" onClick={() => navigate("/products")} >View All Products</button>
+            <button className="bg-red-500 text-white p-3 px-10 mb-10 lg:my-5" onClick={() => navigate("/products")} >View All Products</button>
           </div>
 
         </div>
@@ -145,9 +145,9 @@ const Home = () => {
             <p className="font-bold m-3">This Month</p>
           </div>
 
-          <h1 className="text-red-500 font-bold text-3xl my-3">Best Selling Products</h1>
+          <h1 className="text-xl text-red-500 font-bold lg:text-3xl my-3">Best Selling Products</h1>
 
-          <div className="my-5 flex overflow-x-auto space-x-4 prod-hori">
+          <div className="my-5 flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal items-center overflow-x-auto space-x-4 prod-hori">
           { products && 
             products.filter(item => randomNumbers2.includes(item.productId)).map((item, index) => (
                     <div key={index} className="flex-shrink-0">
@@ -163,9 +163,9 @@ const Home = () => {
 
         </div>
 
-        <div className="flex justify-evenly items-center my-10 py-10">
+        <div className="flex flex-wrap justify-evenly items-center my-10 py-10">
 
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center mb-3">
           <div className="my-3 bg-gray-400 border-gray-400 border-solid p-3 rounded-full">
             <div className="bg-black border border-black border-solid rounded-full p-3">
               <TbTruckDelivery size={30} className="text-white"/>
@@ -175,7 +175,7 @@ const Home = () => {
           <p className="my-1 text-sm text-gray-400 font-semibold">Free delivery for all orders over ₹140</p>
         </div>
 
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center mb-3">
           <div className="my-3 bg-gray-400 border-gray-400 border-solid p-3 rounded-full">
             <div className="bg-black border border-black border-solid rounded-full p-3">
               <MdHeadsetMic size={30} className="text-white"/>
@@ -185,7 +185,7 @@ const Home = () => {
           <p className="my-1 text-sm text-gray-400 font-semibold">Friendly 24/7 Customer Support</p>
         </div>
 
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center mb-3">
           <div className="my-3 bg-gray-400 border-gray-400 border-solid p-3 rounded-full">
             <div className="bg-black border border-black border-solid rounded-full p-3">
               <SiAdguard size={30} className="text-white"/>

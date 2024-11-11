@@ -47,7 +47,7 @@ const WishListCard = ({ item, onDelete }) => {
   };
 
   return (
-    <div className="flex justify-between items-center border border-white p-5 my-10 shadow-2xl bg-gray-200 rounded-lg">
+    <div className="flex justify-between items-center border border-white py-5 px-3 lg:p-5 my-10 shadow-2xl bg-gray-200 rounded-lg">
 
       <Snackbar open={notificationOpen} autoHideDuration={3000} onClose={notificationAction} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} TransitionComponent={Slide} >
         <Alert onClose={notificationAction} severity={severity} sx={{ width: '100%' }}>
@@ -55,9 +55,9 @@ const WishListCard = ({ item, onDelete }) => {
         </Alert>
       </Snackbar>
 
-      <div className="w-[30%] flex items-center">
+      <div className="w-[40%] lg:w-[30%] flex items-center">
         <img src={item.image} alt="Product" className="w-[50px] h-[50px] mx-3"/>
-        <p className="font-medium">{item.name}</p>
+        <p className="w-full truncate font-medium">{item.name}</p>
       </div>
 
       <p className="w-[20%] text-center font-medium">₹{item.price}</p>

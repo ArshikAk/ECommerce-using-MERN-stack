@@ -9,17 +9,17 @@ const OrderCard = ({ order }) => {
   };
 
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-4 shadow-sm">
+    <div className="lg:bg-gray-50 border lg:border-gray-200 lg:rounded-lg lg:p-6 lg:mb-4 lg:shadow-sm">
       <div className="flex justify-between items-start">
 
-        <div className="flex items-center w-1/2">
-          <img src={order.product.image} alt={order.product.name} className="w-16 h-16 mr-4 rounded-md"/>
+        <div className="lg:flex lg:items-center lg:w-1/2">
+          <img src={order.product.image} alt={order.product.name} className="lg:w-16 lg:h-16 lg:mr-4 lg:rounded-md"/>
 
-          <div className="mx-3">
-            <p className="text-gray-800 font-medium">
+          <div className="lg:mx-3">
+            <p className="lg:text-gray-800 lg:font-medium">
               {order.product.name} × {order.product.size}
             </p>
-            <p className="text-gray-700 mt-1">
+            <p className="lg:text-gray-700 lg:mt-1">
               {order.name}
               <br />
               {order.address}, {order.city}, {order.landMark}
@@ -29,26 +29,26 @@ const OrderCard = ({ order }) => {
           </div>
         </div>
 
-        <div className="text-left">
-          <p className="text-gray-600">
-            <span className="font-semibold">Items:</span>1
+        <div className="lg:text-left">
+          <p className="lg:text-gray-600">
+            <span className="lg:font-semibold">Items:</span>1
           </p>
-          <p className="text-gray-600 mt-1">
-            <span className="font-semibold">Payment Method:</span> {order.paymentMethod}
+          <p className="lg:text-gray-600 lg:mt-1">
+            <span className="lg:font-semibold">Payment Method:</span> {order.paymentMethod}
           </p>
-          <p className="text-gray-600 mt-1">
-            <span className="font-semibold">Date:</span> {order.date}
+          <p className="lg:text-gray-600 lg:mt-1">
+            <span className="lg:font-semibold">Date:</span> {order.date}
           </p>
         </div>
 
-        <div className="flex flex-col items-end">
-          <p className="text-lg font-semibold text-gray-900">
+        <div className="lg:flex lg:flex-col lg:items-end">
+          <p className="lg:text-lg lg:font-semibold lg:text-gray-900">
             ₹ {order.product.price}
           </p>
           <select
             value={status}
             onChange={handleStatusChange}
-            className="mt-2 p-2 border rounded-md text-gray-700 bg-white shadow-sm"
+            className="lg:mt-2 lg:p-2 lg:border lg:rounded-md lg:text-gray-700 lg:bg-white lg:shadow-sm"
           >
             <option value="Order Placed">Order Placed</option>
             <option value="Packing">Packing</option>

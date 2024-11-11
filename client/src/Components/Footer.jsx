@@ -3,9 +3,9 @@
 const Footer = () => {
   return (
     <>
-        <div className="bg-black text-white flex justify-evenly items-center py-10">
+        <div className="bg-black text-white flex justify-between items-center px-10 lg:flex-row lg:justify-evenly lg:items-center py-12">
 
-          <div>
+          <div className="">
             <img src={"/logo1.ico"} alt="logo" className="w-[50px]" />
           </div>
 
@@ -16,14 +16,14 @@ const Footer = () => {
             <p className="py-2">Get 10% Off your first order</p>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div className=" hidden lg:flex flex-col justify-center">
             <p className="py-2 font-bold">Support</p>
             <p className="py-2">111, Bijay sarani, Dharka</p>
             <p className="py-2">exclusive@gmail.com</p>
             <p className="py-2">+91 8248436235</p>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div className="hidden lg:flex flex-col justify-center">
             <p className="py-2 font-bold">Account</p>
             <p className="py-2">My Account</p>
             <p className="py-2">Login / Register</p>
@@ -32,7 +32,7 @@ const Footer = () => {
             <p className="py-2">Shop</p>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <div className="hidden lg:flex flex-col justify-center">
             <p className="py-2 font-bold">Quick Link</p>
             <p className="py-2">Privacy Policy</p>
             <p className="py-2">Terms of Use</p>
