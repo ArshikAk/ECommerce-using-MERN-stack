@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
 
         <div className="flex justify-center items-center border-t border-gray-700 border-solid bg-black py-5">
-          <p className="text-gray-400">CopyRight Rimel 2022. All rights reserved</p>
+          <p className="text-gray-400">Copyright 2024@ Exclusive. All rights reserved</p>
         </div>
     </>
   )

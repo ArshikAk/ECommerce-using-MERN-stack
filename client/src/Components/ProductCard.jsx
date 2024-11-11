@@ -87,7 +87,7 @@ const ProductCard = ({ product }) => {
         style = {location.pathname != "/wishlist" ? {display : "block"} : {display : "none"} }
         onClick={() => addCart()}>Add to Cart</button>
 
-      <p className="font-bold mt-3 truncate w-full ">{product.name}</p>
+      <p className="font-semibold text-gray-800 mt-3 truncate w-full ">{product.name}</p>
       <p className="mt-2 text-red-500">₹{product.price}</p>
 
       <CiHeart size={35} className="mx-2 cursor-pointer absolute right-1 top-3 p-1 rounded-full bg-opacity-70 
