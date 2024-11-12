@@ -51,7 +51,7 @@ const Login = () => {
     
     if(validator())
     {
-      axios.post("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/login", {email , password})
+      axios.post("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/login", {email , password})
       .then(async (res) => {
         if(res.data.message == "Success")
         {

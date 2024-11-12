@@ -6,10 +6,14 @@ require("dotenv").config()
 const app = express()
 
 app.use(express.json())
+
+
 app.use(cors({
-    origin: true,
-    credentials : true
-}))
+    origin: 'https://exclusive-ecommerce-bin5t1i8p-arshiks-projects.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  }));
 
 
 

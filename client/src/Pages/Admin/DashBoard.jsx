@@ -27,7 +27,7 @@ const DashBoard = () => {
   };
 
   useEffect(() => {
-    axios.get("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/admin/getDashboardData",config)
+    axios.get("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/admin/getDashboardData",config)
     .then((result) => {
         console.log(result.data)
         setTotalSales(result.data.totalSales);

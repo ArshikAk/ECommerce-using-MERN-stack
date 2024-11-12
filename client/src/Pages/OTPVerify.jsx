@@ -46,7 +46,7 @@ const OTPVerify = () => {
 
     let email = localStorage.getItem("email")
 
-    axios.post("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/verifyOTP",{otp,email})
+    axios.post("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/verifyOTP",{otp,email})
         .then((result) => {
             if(result.data == "Success")
             {
@@ -73,7 +73,7 @@ const OTPVerify = () => {
         {
             if(password == confirmPassword)
             {
-                axios.put("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/changePassword",{email , password})
+                axios.put("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/changePassword",{email , password})
                 .then((result) => {
                     if(result.data == "Success")
                     {

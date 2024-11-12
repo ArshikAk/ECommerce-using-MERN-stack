@@ -26,7 +26,7 @@ const WishListCard = ({ item, onDelete }) => {
   const deleteWishListItem = () => {
     setLoading(true);
     axios
-      .delete(`http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishList/deleteWishListItem/${item.productId}`, config)
+      .delete(`httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishList/deleteWishListItem/${item.productId}`, config)
       .then((res) => {
         if (res.data === "Success") {
           setSeverity("success")

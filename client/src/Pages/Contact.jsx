@@ -30,7 +30,7 @@ const Contact = () => {
   }
 
   const sendMail = () => {
-    axios.post("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/contact/sendContact",{name,email,phone,message},config)
+    axios.post("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/contact/sendContact",{name,email,phone,message},config)
     .then((response) => {
       if(response.data.message == "Message sent successfully!")
       {
