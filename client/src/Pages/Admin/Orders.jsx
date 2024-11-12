@@ -15,7 +15,7 @@ const AdminOrders = () => {
   }
 
   useEffect(() =>  {
-    axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/admin/getOrders",config)
+    axios.get("https://exclusiveserver.vercel.app/api/admin/getOrders",config)
     .then((result) => {
       setOrders(result.data.reverse())
     })

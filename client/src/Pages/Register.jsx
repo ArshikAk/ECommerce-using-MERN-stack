@@ -57,7 +57,7 @@ const Register = () => {
 
     if(validator())
     {
-      axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/register", {name , email , password})
+      axios.post("https://exclusiveserver.vercel.app/api/auth/register", {name , email , password})
       .then((res) => {
         if(res.data == "Success")
         {

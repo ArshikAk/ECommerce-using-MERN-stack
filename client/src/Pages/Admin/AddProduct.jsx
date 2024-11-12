@@ -54,7 +54,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/admin/addProduct",{product},config)
+      axios.post("https://exclusiveserver.vercel.app/api/admin/addProduct",{product},config)
       .then((result) => {
         if(result.data == "Success")
         {

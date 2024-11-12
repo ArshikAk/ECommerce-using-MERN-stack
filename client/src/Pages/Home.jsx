@@ -27,7 +27,7 @@ const Home = () => {
   const [products , setProducts] = useState(null)
 
   useEffect(() => {
-    axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/product/getProducts")
+    axios.get("https://exclusiveserver.vercel.app/api/product/getProducts")
     .then((res) => {
      setProducts(res.data)
     })

@@ -61,7 +61,7 @@ const CheckOut = () => {
     }, [items]);
 
     useEffect(() => {
-        axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/getAddress",config)
+        axios.get("https://exclusiveserver.vercel.app/api/address/getAddress",config)
         .then((result) => {
             if(result.data == "No address found" || result.data.length == 0)
             {
@@ -96,7 +96,7 @@ const CheckOut = () => {
 
         event.preventDefault()
 
-        axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/orders/placeOrder",{name,email,phone,address,city,pincode,landmark,paymentMethod,items},config)
+        axios.post("https://exclusiveserver.vercel.app/api/orders/placeOrder",{name,email,phone,address,city,pincode,landmark,paymentMethod,items},config)
         .then((result) => {
             if(saveAddress)
             {
@@ -119,7 +119,7 @@ const CheckOut = () => {
             return
         }
 
-        axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
+        axios.post("https://exclusiveserver.vercel.app/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
         .then((result) => {
             console.log(result.data)
         })

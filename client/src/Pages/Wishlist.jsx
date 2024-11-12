@@ -28,7 +28,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     axios
-      .get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishlist/getWishList", config)
+      .get("https://exclusiveserver.vercel.app/api/wishlist/getWishList", config)
       .then((response) => {
         setItems(response.data.items);
       });
@@ -45,7 +45,7 @@ const Wishlist = () => {
   };
 
   const addToCart = () => {
-    axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/cart/addToCart",{items},config)
+    axios.post("https://exclusiveserver.vercel.app/api/cart/addToCart",{items},config)
     .then((result) => {
       if(result.data == "Success")
       {

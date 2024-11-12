@@ -16,7 +16,7 @@ const CartCard = ({item , onDelete }) => {
 
     const deleteCartItem = () => {
             
-      axios.delete(`https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/cart/deleteCartItem/${item.productId}`, config)
+      axios.delete(`https://exclusiveserver.vercel.app/api/cart/deleteCartItem/${item.productId}`, config)
         .then((res) => {
           if (res.data === "Success") {
             onDelete(item.productId);

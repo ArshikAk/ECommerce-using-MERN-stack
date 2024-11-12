@@ -19,7 +19,7 @@ const Orders = () => {
     const [orderCount,setOrderCount] = useState(0)
 
     useEffect(() => {
-        axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/orders/getOrders",config)
+        axios.get("https://exclusiveserver.vercel.app/api/orders/getOrders",config)
         .then((result) => {
             setOrders(result.data.reverse())
             setOrderCount(result.data.length)

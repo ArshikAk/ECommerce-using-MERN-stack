@@ -36,7 +36,7 @@ const Account = () => {
   }
 
   useEffect(() => {
-    axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/account/getProfile",config)
+    axios.get("https://exclusiveserver.vercel.app/api/account/getProfile",config)
     .then((result) => {
       setName(result.data.name)
       setEmail(result.data.email)
@@ -49,7 +49,7 @@ const Account = () => {
   const saveChanges = () => {
     if(validator())
     {
-      axios.put("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/account/updateProfile",{name,email,changePassword,newPassword,currentPassword},config)
+      axios.put("https://exclusiveserver.vercel.app/api/account/updateProfile",{name,email,changePassword,newPassword,currentPassword},config)
       .then((result) => {
           if(result.data == "Success")
           {

@@ -39,7 +39,7 @@ const OTPEmail = () => {
     event.preventDefault()
     if(validator())
     {
-        axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/getOTP",{email})
+        axios.post("https://exclusiveserver.vercel.app/api/auth/getOTP",{email})
         .then((result) => {
             if(result.data == "Success")
             {
