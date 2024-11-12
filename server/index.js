@@ -9,7 +9,7 @@ app.use(express.json())
 
 
 app.use(cors({
-    origin: 'https://exclusive-ecommerce-bin5t1i8p-arshiks-projects.vercel.app',
+    origin: 'https://exclusive-ecommerce-red.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
