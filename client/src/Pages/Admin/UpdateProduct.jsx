@@ -26,7 +26,7 @@ const UpdateProduct = () => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/product/getProducts/${id}`)
+    axios.get(`http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/product/getProducts/${id}`)
     .then((result) => {
       setProduct(result.data[0])
     })
@@ -60,7 +60,7 @@ const UpdateProduct = () => {
     console.log(product)
 
     try {
-      axios.put("http://localhost:8000/api/admin/updateProduct",{product},config)
+      axios.put("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/admin/updateProduct",{product},config)
       .then((result) => {
         if(result.data == "Success")
         {

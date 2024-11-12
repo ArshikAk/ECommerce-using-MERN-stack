@@ -57,7 +57,7 @@ const Register = () => {
 
     if(validator())
     {
-      axios.post("http://localhost:8000/api/auth/register", {name , email , password})
+      axios.post("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/register", {name , email , password})
       .then((res) => {
         if(res.data == "Success")
         {
@@ -95,7 +95,7 @@ const Register = () => {
           <img src={image} alt="Login Image" className="w-full h-full"/>
         </div>
 
-        <div className="p-[10%] w-full lg:w-[50vw] lg:h-[750px] flex flex-col justify-center items-center">
+        <div className="p-[10%] w-full lg:p-0 lg:w-[50vw] lg:h-[750px] flex flex-col justify-center items-center">
           <div className="lg:w-[50%]">
             <p className="my-3 text-3xl font-bold">Create an Account</p>
             <p className="my-3">Enter your details below</p>

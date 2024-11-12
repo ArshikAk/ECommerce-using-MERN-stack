@@ -51,7 +51,7 @@ const Login = () => {
     
     if(validator())
     {
-      axios.post("http://localhost:8000/api/auth/login", {email , password})
+      axios.post("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/auth/login", {email , password})
       .then(async (res) => {
         if(res.data.message == "Success")
         {
@@ -100,13 +100,13 @@ const Login = () => {
         </Alert>
       </Snackbar>
 
-      <div className="flex w-[100vw] py-[10%]">
+      <div className="flex w-[100vw] py-[10%] lg:p-0">
 
-        <div className="hidden lg:w-[50vw] lg:h-[750px]">
+        <div className="hidden lg:block lg:w-[50vw] lg:h-[750px]">
           <img src={image} alt="Login Image" className="w-full h-full"/>
         </div>
 
-        <div className="w-[100vw] p-[10%] lg:w-[50vw] lg:h-[750px] flex flex-col justify-center lg:items-center">
+        <div className="w-[100vw] p-[10%] lg:p-0 lg:w-[50vw] lg:h-[750px] flex flex-col justify-center lg:items-center">
           <div className="lg:w-[50%]">
             <p className="my-3 text-3xl font-bold">Login to Exclusive</p>
             <p className="hidden lg:block my-3">Enter your details below</p>

@@ -13,7 +13,7 @@ const AdminProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const result = await axios.get("http://localhost:8000/api/product/getProducts");
+        const result = await axios.get("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/product/getProducts");
         setProducts(result.data);
       } catch{
         setError("Failed to fetch products. Please try again later.");

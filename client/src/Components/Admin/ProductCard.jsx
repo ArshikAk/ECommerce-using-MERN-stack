@@ -16,7 +16,7 @@ const ProductCard = ({ item , onDelete }) => {
     }
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:8000/api/admin/deleteProduct/${item.productId}`,config)
+        axios.delete(`http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/admin/deleteProduct/${item.productId}`,config)
         .then((result) => {
           if(result.data == "Success")
           {

@@ -22,7 +22,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/product/getProducts")
+      .get("http://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/product/getProducts")
       .then((res) => {
         setProducts(res.data);
       })
