@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
   }
 
   const addCart = () => {
-    axios.post("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/cart/addCartItem",{product},config)
+    axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/cart/addCartItem",{product},config)
     .then((res) => {
       if(res.data == "Success")
       {
@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
   }
 
   const addWishList = () => {
-    axios.post("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishList/addWishListItem",{product},config)
+    axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishList/addWishListItem",{product},config)
     .then((res) => {
       if(res.data == "Success")
       {
@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
   }
 
   const deleteWishListItem = () => {
-    axios.delete(`httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishList/deleteWishListItem/${product.productId}`,config)
+    axios.delete(`https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/wishList/deleteWishListItem/${product.productId}`,config)
     .then((res) => {
       if(res.data == "Success")
       {

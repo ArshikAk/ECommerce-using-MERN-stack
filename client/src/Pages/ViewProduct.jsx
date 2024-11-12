@@ -40,7 +40,7 @@ const ViewProduct = () => {
     }
 
     useEffect(() => {
-      axios.get(`httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/product/getProducts`)
+      axios.get(`https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/product/getProducts`)
       .then((res) => {
         const prod1 = res.data.filter(item => item.productId == id)
         setProduct(prod1[0])
@@ -57,7 +57,7 @@ const ViewProduct = () => {
     },[product ,products])
 
     useEffect(() => {
-      axios.get(`httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/review/getReview/${id}`,config)
+      axios.get(`https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/review/getReview/${id}`,config)
       .then((res) => {
         if(res.data == "No reviews found")
         {
@@ -78,7 +78,7 @@ const ViewProduct = () => {
 
 
     const sendReview = () => {
-      axios.post(`httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/review/addReview`, {id,message},config)
+      axios.post(`https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/review/addReview`, {id,message},config)
       .then((result) => {
         if(result.data == "Success")
         {

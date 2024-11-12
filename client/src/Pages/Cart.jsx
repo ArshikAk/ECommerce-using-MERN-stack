@@ -30,7 +30,7 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    axios.get("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/cart/getCart",config)
+    axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/cart/getCart",config)
     .then((response) => {
       setCartItems(response.data.cartItems)
     })

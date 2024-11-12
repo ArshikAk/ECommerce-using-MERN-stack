@@ -46,7 +46,7 @@ const AddressBook = () => {
     }
 
     useEffect(() => {
-        axios.get("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/getAddress",config)
+        axios.get("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/getAddress",config)
         .then((result) => {
             if(result.data == "No address found")
             {
@@ -86,7 +86,7 @@ const AddressBook = () => {
             return
         }
 
-        axios.post("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
+        axios.post("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/addAddress",{name,email,phone,address,city,landmark,pincode},config)
         .then((result) => {
             if(result.data == "Success")
             {
@@ -130,7 +130,7 @@ const AddressBook = () => {
     }
 
     const updateAddress = () => {
-        axios.put("httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/updateAddress",{name,email,phone,address,city,landmark,pincode,index},config)
+        axios.put("https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/updateAddress",{name,email,phone,address,city,landmark,pincode,index},config)
         .then((result) => {
             if(result.data == "Success")
             {
@@ -159,7 +159,7 @@ const AddressBook = () => {
 
     const onDelete = (index) => {
 
-        axios.delete(`httpa://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/deleteAddress/${index}`,config)
+        axios.delete(`https://exclusiveserver-xr6s7fded-arshiks-projects.vercel.app/api/address/deleteAddress/${index}`,config)
         .then((result) => {
             if(result.data == "Success")
             {
